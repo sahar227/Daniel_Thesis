@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrailManager", "ThesisProject\TrailManager.csproj", "{31F6863A-CBF5-4FC5-819B-D8285DD19EAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrailManager", "TrailManager\TrailManager.csproj", "{31F6863A-CBF5-4FC5-819B-D8285DD19EAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3D119BD4-B834-4D79-8DAF-FDAD3256E7C4}"
 EndProject
