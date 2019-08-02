@@ -8,7 +8,7 @@ namespace DBModel
 {
     public abstract class DBModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
     }
 }

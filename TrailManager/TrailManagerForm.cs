@@ -20,7 +20,8 @@ namespace ThesisProject
         TrailOne newTrailOne = new TrailOne();
         public TrailManagerForm()
         {
-            // TODO: Parse words json file into words list 
+            var trailTwos = SqliteDataAccess.LoadModel<TrailTwo>("TrailTwo").Result;
+            // TODO: Parse words from sqlite into words list 
 
             // TODO: temp fill of words list - Remove this when no longer needed
             TrailOnes.Add("item", new TrailOne() { Title = "item" });
