@@ -1,6 +1,7 @@
 ﻿using DBModel;
 using DBModel.Trail;
 using DBModel.Utils;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,29 +19,31 @@ namespace ThesisProject
         Dictionary<string, TrailOne> TrailOnes = new Dictionary<string, TrailOne>();
         Dictionary<string, TrailTwo> TrailTwos = new Dictionary<string, TrailTwo>();
 
-        TrailOne newTrailOne = new TrailOne();
+        string selectedImage = null;
         public TrailManagerForm()
         {
-            // TODO: Parse words from sqlite into words list 
-
-            // TODO: temp fill of words list - Remove this when no longer needed
-            TrailOnes.Add("item", new TrailOne() { Title = "item" });
-            TrailTwos.Add("item", new TrailTwo() { Title = "item2" });
+            // Parse words from sqlite into words dictionaries 
             using (var dataContext = new SampleDBContext())
             {
-                dataContext.TrailTwos.Add(new TrailTwo() { Title = "item2" });
-                dataContext.SaveChanges();
+                TrailOnes = dataContext.TrailOnes.ToDictionary(k => k.InterfaceString(), v => v);
+                TrailTwos = dataContext.TrailTwos.ToDictionary(k => k.InterfaceString(), v => v);
             }
-                InitializeComponent();
+
+
+            InitializeComponent();
 
             // populate WordList in UI
-            foreach (var word in TrailOnes.OrderBy(v => v.Key))
-                trailOneList.Items.Add(word.Key);
+            foreach (var trail in TrailOnes.OrderBy(v => v.Key))
+                trailOneList.Items.Add(trail.Key);
+            foreach (var trail in TrailTwos.OrderBy(v => v.Key))
+                trailTwoList.Items.Add(trail.Key);
 
+            // Update image whenever a trail one is selected
             trailOneList.SelectedIndexChanged += (s, e) => 
             {
-                var word = trailOneList.SelectedItem.ToString();
-                pictureBox.ImageLocation = TrailOnes[word].ImagePath;
+                var word = trailOneList.SelectedItem?.ToString();
+                if(word != null)
+                    pictureBox.ImageLocation = TrailOnes[word].ImagePath;
             };
         }
 
@@ -53,7 +56,7 @@ namespace ThesisProject
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
                 {
-                    newTrailOne.ImagePath = fbd.FileName;
+                    selectedImage = fbd.FileName;
                 }
                 else
                     MessageBox.Show("Invalid file!", "Message");
@@ -75,37 +78,47 @@ namespace ThesisProject
 
             if (phaseOneRadio.Checked)
             {
-                if (newTrailOne.ImagePath == null)
+                if (selectedImage == null)
                 {
                     MessageBox.Show("Select an image!", "Message");
                     return;
                 }
+                var newTrailOne = new TrailOne();
                 newTrailOne.InitTrail(titleBox.Text, translationBox.Text);
-                AddTrail(newTrailOne, TrailOnes, trailOneList);
+                newTrailOne.ImagePath = selectedImage;
+                using (var dataContext = new SampleDBContext())
+                {
+                    AddTrail(newTrailOne, TrailOnes, trailOneList, dataContext.TrailOnes);
+                    dataContext.SaveChanges();
+                }
             }
             else if (phaseTwoRadio.Checked)
             {
                 var newTrailTwo = new TrailTwo();
                 newTrailTwo.InitTrail(titleBox.Text, translationBox.Text);
-                AddTrail(newTrailTwo, TrailTwos, trailTwoList);
+                using (var dataContext = new SampleDBContext())
+                {
+                    AddTrail(newTrailTwo, TrailTwos, trailTwoList, dataContext.TrailTwos);
+                    dataContext.SaveChanges();
+                }
             }
             MessageBox.Show("Trail was added successfully!", "Message");
-            newTrailOne = new TrailOne();
+            selectedImage = null;
             titleBox.Text = "";
             translationBox.Text = "";
 
         }
 
-        private void AddTrail<T>(T trail, Dictionary<string, T> trailDic, ListBox trailList) where T : TrailBase
+        private void AddTrail<T>(T trail, Dictionary<string, T> trailDic, ListBox trailList, DbSet<T> dbSet) where T : TrailBase
         {
             try
             {
-                trailDic.Add(trail.Title, trail);
+                trailDic.Add(trail.InterfaceString(), trail);
 
                 // add new word and select it
-                trailList.SelectedIndex = trailList.Items.Add(trail.Title);
+                trailList.SelectedIndex = trailList.Items.Add(trail.InterfaceString());
 
-                // TODO: Also add to sqlite3 db
+                dbSet.Add(trail);
             }
             catch (ArgumentException)
             {
@@ -125,6 +138,41 @@ namespace ThesisProject
         {
             if (phaseTwoRadio.Checked)
                 ImageSelect.Enabled = false;
+        }
+
+        private void rmvTrailTwo(object sender, EventArgs e)
+        {
+            var word = trailTwoList.SelectedItem?.ToString();
+            if (word == null)
+            {
+                // log error
+                return;
+            }
+            trailTwoList.Items.Remove(word);
+            using (var dataContext = new SampleDBContext())
+            {
+                dataContext.TrailTwos.Remove(TrailTwos[word]);
+                dataContext.SaveChanges();
+            }
+            TrailTwos.Remove(word);
+
+        }
+
+        private void rmvTrailOneBtn_Click(object sender, EventArgs e)
+        {
+            var word = trailOneList.SelectedItem?.ToString();
+            if(word == null)
+            {
+                // log error
+                return;
+            }
+            trailOneList.Items.Remove(word);
+            using (var dataContext = new SampleDBContext())
+            {
+                dataContext.TrailOnes.Remove(TrailOnes[word]);
+                dataContext.SaveChanges();
+            }
+            TrailOnes.Remove(word);
         }
     }
 }

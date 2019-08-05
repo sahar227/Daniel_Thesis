@@ -37,8 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.ConfirmBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.rmvTrailOneBtn = new System.Windows.Forms.Button();
+            this.rmvTrailTwoBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.trailTwoList = new System.Windows.Forms.ListBox();
@@ -131,23 +131,25 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "מילים של שלב 1";
             // 
-            // button2
+            // rmvTrailOneBtn
             // 
-            this.button2.Location = new System.Drawing.Point(325, 303);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 43);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "הסר";
-            this.button2.UseVisualStyleBackColor = true;
+            this.rmvTrailOneBtn.Location = new System.Drawing.Point(325, 303);
+            this.rmvTrailOneBtn.Name = "rmvTrailOneBtn";
+            this.rmvTrailOneBtn.Size = new System.Drawing.Size(90, 43);
+            this.rmvTrailOneBtn.TabIndex = 10;
+            this.rmvTrailOneBtn.Text = "הסר";
+            this.rmvTrailOneBtn.UseVisualStyleBackColor = true;
+            this.rmvTrailOneBtn.Click += new System.EventHandler(this.rmvTrailOneBtn_Click);
             // 
-            // button3
+            // rmvTrailTwoBtn
             // 
-            this.button3.Location = new System.Drawing.Point(33, 303);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 43);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "הסר";
-            this.button3.UseVisualStyleBackColor = true;
+            this.rmvTrailTwoBtn.Location = new System.Drawing.Point(33, 303);
+            this.rmvTrailTwoBtn.Name = "rmvTrailTwoBtn";
+            this.rmvTrailTwoBtn.Size = new System.Drawing.Size(90, 43);
+            this.rmvTrailTwoBtn.TabIndex = 14;
+            this.rmvTrailTwoBtn.Text = "הסר";
+            this.rmvTrailTwoBtn.UseVisualStyleBackColor = true;
+            this.rmvTrailTwoBtn.Click += new System.EventHandler(this.rmvTrailTwo);
             // 
             // label5
             // 
@@ -228,11 +230,11 @@
             this.Controls.Add(this.phaseOneRadio);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.translationBox);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.rmvTrailTwoBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.trailTwoList);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.rmvTrailOneBtn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ConfirmBtn);
             this.Controls.Add(this.label3);
@@ -262,8 +264,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button ConfirmBtn;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button rmvTrailOneBtn;
+        private System.Windows.Forms.Button rmvTrailTwoBtn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ListBox trailTwoList;
