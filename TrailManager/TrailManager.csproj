@@ -193,10 +193,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{3d119bd4-b834-4d79-8daf-fdad3256e7c4}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DBModel\DBModel.csproj">
       <Project>{e75e1768-6a44-4763-b8a7-8ae0971c3a36}</Project>
       <Name>DBModel</Name>
