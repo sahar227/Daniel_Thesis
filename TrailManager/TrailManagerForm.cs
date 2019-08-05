@@ -1,4 +1,5 @@
-﻿using DBModel.Trail;
+﻿using DBModel;
+using DBModel.Trail;
 using DBModel.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,14 +21,17 @@ namespace ThesisProject
         TrailOne newTrailOne = new TrailOne();
         public TrailManagerForm()
         {
-            var trailTwos = SqliteDataAccess.LoadModel<TrailTwo>("TrailTwo").Result;
             // TODO: Parse words from sqlite into words list 
 
             // TODO: temp fill of words list - Remove this when no longer needed
             TrailOnes.Add("item", new TrailOne() { Title = "item" });
             TrailTwos.Add("item", new TrailTwo() { Title = "item2" });
-
-            InitializeComponent();
+            using (var dataContext = new SampleDBContext())
+            {
+                dataContext.TrailTwos.Add(new TrailTwo() { Title = "item2" });
+                dataContext.SaveChanges();
+            }
+                InitializeComponent();
 
             // populate WordList in UI
             foreach (var word in TrailOnes.OrderBy(v => v.Key))
