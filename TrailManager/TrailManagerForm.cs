@@ -173,6 +173,7 @@ namespace ThesisProject
                 dataContext.SaveChanges();
             }
             TrailOnes.Remove(word);
+            pictureBox.ImageLocation = null;
         }
     }
 }
