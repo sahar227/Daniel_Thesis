@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,9 +84,16 @@ namespace ThesisProject
                     MessageBox.Show("Select an image!", "Message");
                     return;
                 }
+
                 var newTrailOne = new TrailOne();
                 newTrailOne.InitTrail(titleBox.Text, translationBox.Text);
-                newTrailOne.ImagePath = selectedImage;
+                string storedPath = Path.Combine(@"C:\ThesisUtils\Trails", newTrailOne.InterfaceString());
+
+                Directory.CreateDirectory(storedPath);
+
+                string storedImage = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".image");
+                File.Copy(selectedImage, storedImage);
+                newTrailOne.ImagePath = storedImage;
                 using (var dataContext = new SampleDBContext())
                 {
                     AddTrail(newTrailOne, TrailOnes, trailOneList, dataContext.TrailOnes);
@@ -109,7 +117,7 @@ namespace ThesisProject
 
         }
 
-        private void AddTrail<T>(T trail, Dictionary<string, T> trailDic, ListBox trailList, DbSet<T> dbSet) where T : TrailBase
+        private bool AddTrail<T>(T trail, Dictionary<string, T> trailDic, ListBox trailList, DbSet<T> dbSet) where T : TrailBase
         {
             try
             {
@@ -119,10 +127,12 @@ namespace ThesisProject
                 trailList.SelectedIndex = trailList.Items.Add(trail.InterfaceString());
 
                 dbSet.Add(trail);
+                return true;
             }
             catch (ArgumentException)
             {
                 MessageBox.Show("Word already exists!", "Message");
+                return false;
 
             }
         }
@@ -173,6 +183,7 @@ namespace ThesisProject
                 dataContext.SaveChanges();
             }
             TrailOnes.Remove(word);
+            Directory.Delete(Path.Combine(@"C:\ThesisUtils\Trails", word), true);
             pictureBox.ImageLocation = null;
         }
     }
