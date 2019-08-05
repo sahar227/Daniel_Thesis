@@ -14,5 +14,10 @@ namespace DBModel.Utils
             trail.Title = title;
             trail.Translation = translation;
         }
+
+        public static string InterfaceString(this TrailBase trail)
+        {
+            return $"{trail.Title} - {trail.Translation}";
+        }
     }
 }
