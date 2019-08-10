@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace TheisApp
 {
-    public partial class ThesisApp : Form
+    public partial class StageOne : Form
     {
-        public ThesisApp()
+        public StageOne()
         {
             InitializeComponent();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
