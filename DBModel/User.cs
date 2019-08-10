@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBModel.User
+namespace DBModel
 {
     public enum UserGroup
     {
