@@ -52,7 +52,9 @@ namespace DBModel.Question
         private char SetLetterExcludedFromWord(string word)
         {
             List<char> characters = DistinctCharNotInWord[word];
-            return characters[rng.Next(characters.Count())];
+            if (characters.Count != 0)
+                return characters[rng.Next(characters.Count())];
+            throw new ApplicationException($"Word {word} contains all known letters");
         }
 
         private char SetLetterFromWord(string word)

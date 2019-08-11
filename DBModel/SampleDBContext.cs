@@ -16,9 +16,9 @@ namespace DBModel
         private const string DatabaseFileName = "Thesis.db";
         public SampleDBContext()
         {
+            SQLitePCL.Batteries.Init();
             if (!File.Exists(Path.Combine(DatabaseDir,DatabaseFileName)))
             {
-                SQLitePCL.Batteries.Init();
                 Database.EnsureDeleted();
                 Database.EnsureCreated();
             }

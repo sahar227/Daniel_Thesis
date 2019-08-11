@@ -30,9 +30,9 @@ namespace DBModel
         public List<QuestionOne> StageOneQuestions = new List<QuestionOne>();
         public List<QuestionTwo> StageTwoQuestions = new List<QuestionTwo>();
 
-        public User(string name, UserGroup group)
+        public User(string fullName, UserGroup group)
         {
-            FullName = name;
+            FullName = fullName;
             Group = group;
         }
 

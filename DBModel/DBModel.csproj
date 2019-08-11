@@ -162,6 +162,7 @@
     <Compile Include="Trail\TrailBase.cs" />
     <Compile Include="Trail\TrailOne.cs" />
     <Compile Include="Trail\TrailTwo.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Utils\TrailMixins.cs" />
   </ItemGroup>
   <ItemGroup>

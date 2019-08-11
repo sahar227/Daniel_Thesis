@@ -31,7 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.nameTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -52,6 +52,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "התחלה";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -71,7 +72,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.nameTxt);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(443, 96);
             this.groupBox1.Name = "groupBox1";
@@ -82,12 +83,12 @@
             this.groupBox1.Text = "משתמש חדש";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // textBox1
+            // nameTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(31, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(231, 22);
-            this.textBox1.TabIndex = 1;
+            this.nameTxt.Location = new System.Drawing.Point(31, 41);
+            this.nameTxt.Name = "nameTxt";
+            this.nameTxt.Size = new System.Drawing.Size(231, 22);
+            this.nameTxt.TabIndex = 1;
             // 
             // label1
             // 
@@ -126,7 +127,6 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(37, 21);
             this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "2";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -137,7 +137,6 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(37, 21);
             this.radioButton3.TabIndex = 6;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "3";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
@@ -148,7 +147,6 @@
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(37, 21);
             this.radioButton4.TabIndex = 7;
-            this.radioButton4.TabStop = true;
             this.radioButton4.Text = "4";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
@@ -201,7 +199,7 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox nameTxt;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox listBox1;
     }
