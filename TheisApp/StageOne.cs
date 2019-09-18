@@ -1,95 +1,61 @@
-﻿using Common.Mixins;
-using DBModel;
-using DBModel.Question;
-using DBModel.Trail;
+﻿using DBModel;
+using DBModel.QuestionModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TheisApp
 {
+    // TODO: make sound play when word is shown
+    // TODO: Add timer to questions
     public partial class StageOne : Form
     {
-        private List<QuestionOne> m_questions;
-        private User m_user = CurrentUser.currentUser;
-
-        private int questionIndex = 0;
-
-        public StageOne()
+        private readonly User m_user = CurrentUser.currentUser;
+        private readonly QuestionManager<QuestionOne> m_questionManager;
+        public StageOne(QuestionManager<QuestionOne> questionManager)
         {
             InitializeComponent();
+            m_questionManager = questionManager;
         }
 
         private void StageOne_Load(object sender, EventArgs e)
         {
-            
-            m_questions = CreateQuestions();
-            WordLabel.Text = m_questions[questionIndex].TrailDetails.Title;
-            LetterLabel.Text = m_questions[questionIndex].LetterInQuestion.ToString();
-            pictureBox.ImageLocation = m_questions[questionIndex].TrailDetails.ImagePath;
+            SetNewQuestionOrFinish();
         }
 
-        private List<QuestionOne> CreateQuestions()
-        {
-            List<TrailOne> trails = LoadTrails();
-            InitializeKnownLetters(trails);
 
-            var questions = new List<QuestionOne>();
-            foreach (var trail in trails)
+        private void FinishStageOne()
+        {
+            // TODO: start stage two
+            this.Hide();
+        }
+
+        private void SaveUser()
+        {
+            // TODO move this to user repository class
+            using (var context = new SampleDBContext())
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    questions.Add(new QuestionOne(trail, true));
-                    questions.Add(new QuestionOne(trail, false));
-                }
+                context.Users.Add(m_user);
+                context.SaveChanges();
             }
-            questions.Shuffle();
-            return questions;
         }
 
-        private static void InitializeKnownLetters(List<TrailOne> trails)
+        private void SetNewQuestionOrFinish()
         {
-            QuestionOne.AllKnownLetters = trails.SelectMany(v => v.Title).Distinct().ToList();
-        }
-
-        private List<TrailOne> LoadTrails()
-        {
-            return TrailRepository.TrailRepository.Instance.m_trailOnes;
-        }
-
-
-        private void SetNewQuestion()
-        {
-            questionIndex++;
-            if (questionIndex < m_questions.Count)
+            var question = m_questionManager.GetNextQuestion();
+            if (question != null)
             {
-                WordLabel.Text = m_questions[questionIndex].TrailDetails.Title;
-                LetterLabel.Text = m_questions[questionIndex].LetterInQuestion.ToString();
-                pictureBox.ImageLocation = m_questions[questionIndex].TrailDetails.ImagePath;
+                QuestionLabel.Text = question.AskedQuestion;
+                pictureBox.ImageLocation = question.Image;
             }
             else
             {
-                m_user.StageOneQuestions.AddRange(m_questions);
-                using (var context = new SampleDBContext())
-                {
-                    context.Users.Add(m_user);
-                    context.SaveChanges();
-                }
-                    // TODO: start stage two
-                    this.Hide();
+                m_user.StageOneQuestions.AddRange(m_questionManager.Questions);
+                m_user.EndTimeStageOne = DateTime.Now;
+                SaveUser();
+                FinishStageOne();
             }
-        }
-
-        private void GiveAnswer(bool answer)
-        {
-            m_questions[questionIndex].UserAnswer = answer;
-            SetNewQuestion();
         }
 
         private void YesBtn_Click(object sender, EventArgs e)
@@ -100,6 +66,17 @@ namespace TheisApp
         private void NoBtn_Click(object sender, EventArgs e)
         {
             GiveAnswer(false);
+        }
+
+        private void GiveAnswer(bool answer)
+        {
+            m_questionManager.AnswerQuestion(answer);
+            SetNewQuestionOrFinish();
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

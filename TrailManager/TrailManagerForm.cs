@@ -15,6 +15,10 @@ using System.Windows.Forms;
 
 namespace ThesisProject
 {
+    // TODO: Allow adding sound file
+    // TODO: Allow playing sound file in menu
+    // TODO: Add indication to the number of trails added for each trail type
+    // TODO: Clean up code
     public partial class TrailManagerForm : Form
     {
         Dictionary<string, TrailOne> TrailOnes = new Dictionary<string, TrailOne>();

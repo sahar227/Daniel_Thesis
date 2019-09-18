@@ -28,38 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.WordLabel = new System.Windows.Forms.Label();
-            this.LetterLabel = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            this.QuestionLabel = new System.Windows.Forms.Label();
             this.YesBtn = new System.Windows.Forms.Button();
             this.NoBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // WordLabel
+            // QuestionLabel
             // 
-            this.WordLabel.AutoSize = true;
-            this.WordLabel.Location = new System.Drawing.Point(346, 122);
-            this.WordLabel.Name = "WordLabel";
-            this.WordLabel.Size = new System.Drawing.Size(46, 17);
-            this.WordLabel.TabIndex = 0;
-            this.WordLabel.Text = "label1";
-            // 
-            // LetterLabel
-            // 
-            this.LetterLabel.AutoSize = true;
-            this.LetterLabel.Location = new System.Drawing.Point(346, 171);
-            this.LetterLabel.Name = "LetterLabel";
-            this.LetterLabel.Size = new System.Drawing.Size(46, 17);
-            this.LetterLabel.TabIndex = 1;
-            this.LetterLabel.Text = "label1";
+            this.QuestionLabel.AutoSize = true;
+            this.QuestionLabel.Location = new System.Drawing.Point(260, 99);
+            this.QuestionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.QuestionLabel.Name = "QuestionLabel";
+            this.QuestionLabel.Size = new System.Drawing.Size(35, 13);
+            this.QuestionLabel.TabIndex = 0;
+            this.QuestionLabel.Text = "label1";
             // 
             // YesBtn
             // 
-            this.YesBtn.Location = new System.Drawing.Point(272, 415);
+            this.YesBtn.Location = new System.Drawing.Point(204, 337);
+            this.YesBtn.Margin = new System.Windows.Forms.Padding(2);
             this.YesBtn.Name = "YesBtn";
-            this.YesBtn.Size = new System.Drawing.Size(75, 23);
+            this.YesBtn.Size = new System.Drawing.Size(56, 19);
             this.YesBtn.TabIndex = 2;
             this.YesBtn.Text = "כן";
             this.YesBtn.UseVisualStyleBackColor = true;
@@ -67,44 +60,41 @@
             // 
             // NoBtn
             // 
-            this.NoBtn.Location = new System.Drawing.Point(379, 415);
+            this.NoBtn.Location = new System.Drawing.Point(284, 337);
+            this.NoBtn.Margin = new System.Windows.Forms.Padding(2);
             this.NoBtn.Name = "NoBtn";
-            this.NoBtn.Size = new System.Drawing.Size(75, 23);
+            this.NoBtn.Size = new System.Drawing.Size(56, 19);
             this.NoBtn.TabIndex = 3;
             this.NoBtn.Text = "לא";
             this.NoBtn.UseVisualStyleBackColor = true;
             this.NoBtn.Click += new System.EventHandler(this.NoBtn_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(302, 81);
-            this.label1.Name = "label1";
-            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label1.Size = new System.Drawing.Size(155, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "האם האות מופיעה במילה?";
-            // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(223, 191);
+            this.pictureBox.Location = new System.Drawing.Point(167, 155);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(297, 188);
+            this.pictureBox.Size = new System.Drawing.Size(223, 153);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 5;
             this.pictureBox.TabStop = false;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
+            // 
             // StageOne
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.NoBtn);
             this.Controls.Add(this.YesBtn);
-            this.Controls.Add(this.LetterLabel);
-            this.Controls.Add(this.WordLabel);
+            this.Controls.Add(this.QuestionLabel);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StageOne";
             this.Text = "StageOne";
             this.Load += new System.EventHandler(this.StageOne_Load);
@@ -116,11 +106,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label WordLabel;
-        private System.Windows.Forms.Label LetterLabel;
+        private System.Windows.Forms.Label QuestionLabel;
         private System.Windows.Forms.Button YesBtn;
         private System.Windows.Forms.Button NoBtn;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

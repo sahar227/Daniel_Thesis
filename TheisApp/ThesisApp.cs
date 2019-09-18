@@ -23,6 +23,8 @@ namespace TheisApp
 
         }
 
+        // TODO: Make sure to handle creation of proper experience per group
+        // TODO: Maybe make form loading dictionary per group to easily manipulate which group sees what stages
         private void button1_Click(object sender, EventArgs e)
         {
             string name = nameTxt.Text;
@@ -30,7 +32,8 @@ namespace TheisApp
             if ((!string.IsNullOrWhiteSpace(name)) && (group != UserGroup.Unknown))
             {
                 CurrentUser.currentUser = new User(name, group);
-                OpenForm(new StageOne());
+                // TODO: Create actual questionManager as parameter (Lookup ninject for dependency injection)
+                OpenForm(new StageOne(null));
             }
             else
                 MessageBox.Show("Error creating user");
