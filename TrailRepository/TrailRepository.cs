@@ -1,7 +1,5 @@
-﻿using Common.Mixins;
-using DBModel;
+﻿using DBModel;
 using DBModel.Trail;
-using DBModel.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,46 +8,35 @@ using System.Threading.Tasks;
 
 namespace TrailRepository
 {
-    public class TrailRepository
+    public interface ITrailRepository
     {
-        // Make class into a singleton
-        private static readonly Lazy<TrailRepository> lazy = new Lazy<TrailRepository> (() => new TrailRepository());
-        public static TrailRepository Instance { get { return lazy.Value; } }
+        List<TrailOne> LoadTrailOnesFromDatabase();
+        List<TrailTwo> LoadTrailTwosFromDatabase();
+    }
 
+    public class TrailRepository : ITrailRepository
+    {
+        private readonly SampleDBContext m_dataContext = new SampleDBContext();
 
-        public List<TrailOne> m_trailOnes { get; private set; } = new List<TrailOne>();
-        public List<TrailTwo> m_trailTwos { get; private set; } = new List<TrailTwo>();
-
-
-        private void LoadTrailsFromDatabase()
+        private List<TrailOne> m_trailOnes = null;
+        private List<TrailTwo> m_trailTwos = null;
+        public List<TrailOne> LoadTrailOnesFromDatabase()
         {
-            using (var dataContext = new SampleDBContext())
+            if(m_trailOnes == null)
+                m_trailOnes = m_dataContext.TrailOnes.ToList();
+            return m_trailOnes;
+        }
+
+        public List<TrailTwo> LoadTrailTwosFromDatabase()
+        {
+            if (m_trailTwos == null)
             {
-                m_trailOnes = dataContext.TrailOnes.ToList();
-                m_trailTwos = dataContext.TrailTwos.ToList();
+                var trailOnes = LoadTrailOnesFromDatabase();
+                m_trailTwos = m_dataContext.TrailTwos.ToList();
+                m_trailTwos.AddRange(trailOnes.Select(v => (TrailTwo)v));
             }
-        }
 
-        public TrailRepository()
-        {
-            LoadTrailsFromDatabase();
-        }
-
-        public List<TrailOne> GetStageOneTrails()
-        {
-            List<TrailOne> stageOneTrails = new List<TrailOne>();
-            stageOneTrails.AddRange(m_trailOnes);
-            stageOneTrails.Shuffle();
-            return stageOneTrails;
-        }
-
-        public List<TrailTwo> GetStageTwoTrails()
-        {
-            List<TrailTwo> stageTwoTrails = new List<TrailTwo>();
-            stageTwoTrails.AddRange(m_trailTwos);
-            stageTwoTrails.AddRange(m_trailOnes.Select(v => (TrailTwo)v));
-            stageTwoTrails.Shuffle();
-            return stageTwoTrails;
+            return m_trailTwos;
         }
 
     }

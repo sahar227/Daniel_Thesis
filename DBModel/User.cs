@@ -1,11 +1,8 @@
-﻿using DBModel.Question;
+﻿using DBModel.QuestionModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DBModel.User
+namespace DBModel
 {
     public enum UserGroup
     {
@@ -30,9 +27,9 @@ namespace DBModel.User
         public List<QuestionOne> StageOneQuestions = new List<QuestionOne>();
         public List<QuestionTwo> StageTwoQuestions = new List<QuestionTwo>();
 
-        public User(string name, UserGroup group)
+        public User(string fullName, UserGroup group)
         {
-            FullName = name;
+            FullName = fullName;
             Group = group;
         }
 
