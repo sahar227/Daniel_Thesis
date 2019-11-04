@@ -16,9 +16,9 @@ namespace TheisApp.Questions.QuestionCreator
         private const int m_trailRepeat = 4;
         private readonly List<TrailOne> m_trails = new List<TrailOne>();
 
-        public QuestionOneListCreator(IQuestionCreator<QuestionOne, TrailOne> questionCreator, ITrailRepository trailRepository)
+        public QuestionOneListCreator(IQuestionCreator<QuestionOne, TrailOne> questionCreator, List<TrailOne> trailOnes)
         {
-            m_trails = trailRepository.LoadTrailOnesFromDatabase();
+            m_trails = trailOnes;
             m_questionCreator = questionCreator;
         }
 

@@ -12,7 +12,12 @@ namespace TheisApp.Questions.QuestionCreator
     {
         private readonly Random m_rng = new Random();
 
-        public static List<string> AllKnownTranslations = new List<string>();
+        private readonly List<string> m_allKnownTranslations = new List<string>();
+
+        public QuestionTwoCreator(List<string> allKnownTranslations)
+        {
+            m_allKnownTranslations = allKnownTranslations;
+        }
 
         public QuestionTwo CreateNoQuestion(TrailTwo trail)
         {
@@ -41,9 +46,9 @@ namespace TheisApp.Questions.QuestionCreator
         {
             if (expectedAnswer)
                 return actualTranslation;
-            return AllKnownTranslations.Except(new List<string>() { actualTranslation })
+            return m_allKnownTranslations.Except(new List<string>() { actualTranslation })
                 .ToList()
-                [m_rng.Next(AllKnownTranslations.Count - 1)];
+                [m_rng.Next(m_allKnownTranslations.Count - 1)];
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TheisApp.Questions.QuestionCreator
             public DistinctCharForWord(string word)
             {
                 DistinctCharInWord = word.Distinct().ToList();
-                DistinctCharNotInWord = AllKnownLetters.Except(word).ToList();
+                DistinctCharNotInWord = m_allKnownLetters.Except(word).ToList();
             }
             public List<char> DistinctCharInWord;
             public List<char> DistinctCharNotInWord;
@@ -25,7 +25,11 @@ namespace TheisApp.Questions.QuestionCreator
         private readonly Random m_rng = new Random();
 
         // TODO: Move this to trailManager project and save list in db
-        public static List<char> AllKnownLetters = new List<char>();
+        public static List<char> m_allKnownLetters = new List<char>();
+        public QuestionOneCreator(List<char> allKnownLetters)
+        {
+            m_allKnownLetters = allKnownLetters;
+        }
 
 
         public QuestionOne CreateNoQuestion(TrailOne trail)

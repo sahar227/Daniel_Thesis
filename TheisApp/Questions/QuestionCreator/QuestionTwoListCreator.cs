@@ -17,10 +17,11 @@ namespace TheisApp.Questions.QuestionCreator
         private readonly List<TrailTwo> m_trails = new List<TrailTwo>();
 
 
-        public QuestionTwoListCreator(IQuestionCreator<QuestionTwo, TrailTwo> questionCreator, ITrailRepository trailRepository)
+        public QuestionTwoListCreator(IQuestionCreator<QuestionTwo, TrailTwo> questionCreator, List<TrailTwo> trailTwos)
         {
-            m_trails = trailRepository.LoadTrailTwosFromDatabase();
+            m_trails = trailTwos;
             m_questionCreator = questionCreator;
+         
         }
         public List<QuestionTwo> CreateQuestions()
         {
