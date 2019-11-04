@@ -1,4 +1,5 @@
 ﻿using DBModel;
+using DBModel.QuestionModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheisApp.Questions.QuestionCreator;
 
 namespace TheisApp
 {
@@ -33,7 +35,12 @@ namespace TheisApp
             {
                 CurrentUser.currentUser = new User(name, group);
                 // TODO: Create actual questionManager as parameter (Lookup ninject for dependency injection)
-                OpenForm(new StageOne(null));
+                var trailRepository = new TrailRepository.TrailRepository();
+                var trailOnes = trailRepository.LoadTrailOnesFromDatabase();
+                var questionCreator = new QuestionOneCreator(trailOnes.SelectMany(v => v.Title).Distinct().ToList());
+                var questionOneListCreator = new QuestionOneListCreator(questionCreator, trailOnes);
+                var questionOneManager = new QuestionManager<QuestionOne>(questionOneListCreator);
+                OpenForm(new StageOne(questionOneManager));
             }
             else
                 MessageBox.Show("Error creating user");
