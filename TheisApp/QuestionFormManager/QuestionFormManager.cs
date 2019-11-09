@@ -34,8 +34,10 @@ namespace TheisApp.QuestionFormManager
         private void PlayNextForm()
         {
             m_currentFormIndex++;
-            if(m_currentFormIndex < m_forms.Count)
+            if (m_currentFormIndex < m_forms.Count)
                 OpenForm(m_forms[m_currentFormIndex]);
+            else
+                CurrentUser.UpsertUser();
         }
     }
 }

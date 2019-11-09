@@ -14,13 +14,13 @@ namespace TheisApp
 {
     public partial class StageTwo : Form
     {
-        private readonly User m_user = CurrentUser.currentUser;
         private readonly QuestionManager<QuestionTwo> m_questionManager;
 
         public StageTwo(QuestionManager<QuestionTwo> questionManager)
         {
             InitializeComponent();
             m_questionManager = questionManager;
+            CurrentUser.currentUser.StartTimeStageTwo = DateTime.Now;
         }
 
         private void StageTwo_Load(object sender, EventArgs e)
@@ -37,21 +37,8 @@ namespace TheisApp
             }
             else
             {
-                m_user.StageTwoQuestions.AddRange(m_questionManager.Questions);
-                m_user.EndTimeStageOne = DateTime.Now;
-                SaveUser();
                 FinishStage();
             }
-        }
-
-        private void SaveUser()
-        {
-            // TODO move this to user repository class
-            /*using (var context = new SampleDBContext())
-            {
-                context.Users.Add(m_user);
-                context.SaveChanges();
-            }*/
         }
 
         private void GiveAnswer(bool answer)
@@ -72,6 +59,8 @@ namespace TheisApp
 
         private void FinishStage()
         {
+            CurrentUser.AddQuestionTwos(m_questionManager.Questions);
+            CurrentUser.currentUser.EndTimeStageTwo = DateTime.Now;
             this.Close();
         }
     }

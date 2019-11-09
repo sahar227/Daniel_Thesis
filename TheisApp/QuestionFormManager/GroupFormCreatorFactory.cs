@@ -20,19 +20,29 @@ namespace TheisApp.QuestionFormManager
                 case UserGroup.One:
                     formCreator.Add(QuestionFormsCreator.CreatePhase1);
                     formCreator.Add(QuestionFormsCreator.CreatePhase2);
-                    return Create(formCreator);
+                    break;
 
                 case UserGroup.Two:
                     formCreator.Add(QuestionFormsCreator.CreatePhase2);
-                    return Create(formCreator);
+                    break;
 
                 case UserGroup.Three:
                     formCreator.Add(QuestionFormsCreator.CreatePhase1WithFalseImages);
                     formCreator.Add(QuestionFormsCreator.CreatePhase2);
-                    return Create(formCreator);
+                    break;
+
+                case UserGroup.Four:
+                    formCreator.Add(QuestionFormsCreator.CreatePhase1);
+                    break;
+
+                case UserGroup.FourContinued:
+                    formCreator.Add(QuestionFormsCreator.CreatePhase2);
+                    break;
 
                 default: throw new NotImplementedException();
             }
+            return Create(formCreator);
+
         }
 
         private static List<Form> Create(List<Func<TrailRepository.TrailRepository, Form>> formCreators)

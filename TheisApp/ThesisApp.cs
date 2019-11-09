@@ -10,14 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheisApp.Questions.QuestionCreator;
+using TrailRepository;
 
 namespace TheisApp
 {
     public partial class ThesisApp : Form
     {
+        private readonly List<User> m_group4Users = new List<User>();
         public ThesisApp()
         {
             InitializeComponent();
+            m_group4Users = UserRepository.GetUnfinishedGroup4Users();
+            Group4Users.Items.AddRange(m_group4Users.Select(v => v.FullName).ToArray());
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -25,8 +29,6 @@ namespace TheisApp
 
         }
 
-        // TODO: Make sure to handle creation of proper experience per group
-        // TODO: Maybe make form loading dictionary per group to easily manipulate which group sees what stages
         private void button1_Click(object sender, EventArgs e)
         {
             string name = nameTxt.Text;
@@ -42,13 +44,6 @@ namespace TheisApp
                 MessageBox.Show("Error creating user");
         }
 
-        /*private void OpenForm(Form f)
-        {
-            this.Hide();
-            f.Closed += (s, args) => this.Close();
-            f.Show();
-        }*/
-
         private UserGroup CheckGroup()
         {
             if (radioButton1.Checked)
@@ -61,6 +56,18 @@ namespace TheisApp
                 return UserGroup.Four;
 
             return UserGroup.Unknown;
+        }
+
+        private void ContinueBtn_Click(object sender, EventArgs e)
+        {
+            var selectedName = Group4Users.SelectedItem?.ToString();
+            if (!string.IsNullOrWhiteSpace(selectedName))
+            {
+                CurrentUser.currentUser = m_group4Users.Find(v => v.FullName == selectedName);
+                var questionFormManager = new QuestionFormManager.QuestionFormManager(UserGroup.FourContinued);
+                this.Hide();
+                questionFormManager.Start();
+            }
         }
     }
 }

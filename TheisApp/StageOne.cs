@@ -11,12 +11,13 @@ namespace TheisApp
     // TODO: Add timer to questions
     public partial class StageOne : Form
     {
-        private readonly User m_user = CurrentUser.currentUser;
         private readonly QuestionManager<QuestionOne> m_questionManager;
+
         public StageOne(QuestionManager<QuestionOne> questionManager)
         {
             InitializeComponent();
             m_questionManager = questionManager;
+            CurrentUser.currentUser.StartTimeStageOne = DateTime.Now;
         }
 
         private void StageOne_Load(object sender, EventArgs e)
@@ -27,17 +28,9 @@ namespace TheisApp
 
         private void FinishStage()
         {
+            CurrentUser.AddQuestionOnes(m_questionManager.Questions);
+            CurrentUser.currentUser.EndTimeStageOne = DateTime.Now;
             this.Close();
-        }
-
-        private void SaveUser()
-        {
-            // TODO move this to user repository class
-           /* using (var context = new SampleDBContext())
-            {
-                context.Users.Add(m_user);
-                context.SaveChanges();
-            }*/
         }
 
         private void SetNewQuestionOrFinish()
@@ -50,9 +43,6 @@ namespace TheisApp
             }
             else
             {
-                m_user.StageOneQuestions.AddRange(m_questionManager.Questions);
-                m_user.EndTimeStageOne = DateTime.Now;
-                SaveUser();
                 FinishStage();
             }
         }

@@ -10,7 +10,8 @@ namespace DBModel
         One,
         Two,
         Three,
-        Four
+        Four,
+        FourContinued
     }
 
     public class User : DBModel
