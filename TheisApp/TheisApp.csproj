@@ -152,6 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrentUser.cs" />
+    <Compile Include="QuestionFormManager\GroupFormCreatorFactory.cs" />
+    <Compile Include="QuestionFormManager\QuestionFormCreators\GroupOneFormCreator.cs" />
+    <Compile Include="QuestionFormManager\QuestionFormCreators\IGroupFormCreator.cs" />
+    <Compile Include="QuestionFormManager\QuestionFormManager.cs" />
     <Compile Include="Questions\QuestionCreator\IQuestionCreator.cs" />
     <Compile Include="Questions\QuestionCreator\IQuestionListCreator.cs" />
     <Compile Include="Questions\QuestionCreator\QuestionOneCreator.cs" />
@@ -164,6 +168,12 @@
     </Compile>
     <Compile Include="StageOne.Designer.cs">
       <DependentUpon>StageOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StageTwo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StageTwo.Designer.cs">
+      <DependentUpon>StageTwo.cs</DependentUpon>
     </Compile>
     <Compile Include="ThesisApp.cs">
       <SubType>Form</SubType>
@@ -184,6 +194,9 @@
     </Compile>
     <EmbeddedResource Include="StageOne.resx">
       <DependentUpon>StageOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StageTwo.resx">
+      <DependentUpon>StageTwo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThesisApp.resx">
       <DependentUpon>ThesisApp.cs</DependentUpon>

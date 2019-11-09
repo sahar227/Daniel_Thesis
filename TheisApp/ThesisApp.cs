@@ -34,24 +34,20 @@ namespace TheisApp
             if ((!string.IsNullOrWhiteSpace(name)) && (group != UserGroup.Unknown))
             {
                 CurrentUser.currentUser = new User(name, group);
-                // TODO: Create actual questionManager as parameter (Lookup ninject for dependency injection)
-                var trailRepository = new TrailRepository.TrailRepository();
-                var trailOnes = trailRepository.LoadTrailOnesFromDatabase();
-                var questionCreator = new QuestionOneCreator(trailOnes.SelectMany(v => v.Title).Distinct().ToList());
-                var questionOneListCreator = new QuestionOneListCreator(questionCreator, trailOnes);
-                var questionOneManager = new QuestionManager<QuestionOne>(questionOneListCreator);
-                OpenForm(new StageOne(questionOneManager));
+                var questionFormManager = new QuestionFormManager.QuestionFormManager(group);
+                this.Hide();
+                questionFormManager.Start();
             }
             else
                 MessageBox.Show("Error creating user");
         }
 
-        private void OpenForm(Form f)
+        /*private void OpenForm(Form f)
         {
             this.Hide();
             f.Closed += (s, args) => this.Close();
             f.Show();
-        }
+        }*/
 
         private UserGroup CheckGroup()
         {

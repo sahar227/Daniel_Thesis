@@ -25,20 +25,19 @@ namespace TheisApp
         }
 
 
-        private void FinishStageOne()
+        private void FinishStage()
         {
-            // TODO: start stage two
-            this.Hide();
+            this.Close();
         }
 
         private void SaveUser()
         {
             // TODO move this to user repository class
-            using (var context = new SampleDBContext())
+           /* using (var context = new SampleDBContext())
             {
                 context.Users.Add(m_user);
                 context.SaveChanges();
-            }
+            }*/
         }
 
         private void SetNewQuestionOrFinish()
@@ -54,7 +53,7 @@ namespace TheisApp
                 m_user.StageOneQuestions.AddRange(m_questionManager.Questions);
                 m_user.EndTimeStageOne = DateTime.Now;
                 SaveUser();
-                FinishStageOne();
+                FinishStage();
             }
         }
 
