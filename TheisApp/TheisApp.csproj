@@ -153,8 +153,7 @@
   <ItemGroup>
     <Compile Include="CurrentUser.cs" />
     <Compile Include="QuestionFormManager\GroupFormCreatorFactory.cs" />
-    <Compile Include="QuestionFormManager\QuestionFormCreators\GroupOneFormCreator.cs" />
-    <Compile Include="QuestionFormManager\QuestionFormCreators\IGroupFormCreator.cs" />
+    <Compile Include="QuestionFormManager\QuestionFormCreators\QuestionFormsCreator.cs" />
     <Compile Include="QuestionFormManager\QuestionFormManager.cs" />
     <Compile Include="Questions\QuestionCreator\IQuestionCreator.cs" />
     <Compile Include="Questions\QuestionCreator\IQuestionListCreator.cs" />
