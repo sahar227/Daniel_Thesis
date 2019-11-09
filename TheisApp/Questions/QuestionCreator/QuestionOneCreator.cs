@@ -22,7 +22,7 @@ namespace TheisApp.Questions.QuestionCreator
         }
         private static readonly Dictionary<string, DistinctCharForWord> m_distinctCharForWord = new Dictionary<string, DistinctCharForWord>();
 
-        private readonly Random m_rng = new Random();
+        protected readonly Random m_rng = new Random();
 
         // TODO: Move this to trailManager project and save list in db
         public static List<char> m_allKnownLetters = new List<char>();
@@ -48,7 +48,7 @@ namespace TheisApp.Questions.QuestionCreator
             return $"Does the letter {questionSubject} appear in the word {word}?";
         }
 
-        private QuestionOne CreateQuestion(TrailOne trail, bool expectedAnswer)
+        protected virtual QuestionOne CreateQuestion(TrailOne trail, bool expectedAnswer)
         {
             BreakdownLettersAndCache(trail.Title);
 

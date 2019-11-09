@@ -26,6 +26,11 @@ namespace TheisApp.QuestionFormManager
                     formCreator.Add(QuestionFormsCreator.CreatePhase2);
                     return Create(formCreator);
 
+                case UserGroup.Three:
+                    formCreator.Add(QuestionFormsCreator.CreatePhase1WithFalseImages);
+                    formCreator.Add(QuestionFormsCreator.CreatePhase2);
+                    return Create(formCreator);
+
                 default: throw new NotImplementedException();
             }
         }

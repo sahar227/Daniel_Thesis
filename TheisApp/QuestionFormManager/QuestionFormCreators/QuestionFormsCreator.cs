@@ -21,6 +21,17 @@ namespace TheisApp.QuestionFormManager.QuestionFormCreators
             return new StageOne(questionOneManager);
         }
 
+        public static Form CreatePhase1WithFalseImages(TrailRepository.TrailRepository trailRepository)
+        {
+            // TODO: Maybe use dependency injection (lookup ninject)
+            var trailOnes = trailRepository.LoadTrailOnesFromDatabase();
+            var questionCreator = new QuestionOneCreatorFalseImage(trailOnes.SelectMany(v => v.Title).Distinct().ToList(),
+                                                                    trailOnes.Select(v => v.ImagePath).Distinct().ToList());
+            var questionOneListCreator = new QuestionOneListCreator(questionCreator, trailOnes);
+            var questionOneManager = new QuestionManager<QuestionOne>(questionOneListCreator);
+            return new StageOne(questionOneManager);
+        }
+
         public static Form CreatePhase2(TrailRepository.TrailRepository trailRepository)
         {
             // TODO: Maybe use dependency injection (lookup ninject)

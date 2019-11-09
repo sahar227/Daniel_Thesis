@@ -158,6 +158,7 @@
     <Compile Include="Questions\QuestionCreator\IQuestionCreator.cs" />
     <Compile Include="Questions\QuestionCreator\IQuestionListCreator.cs" />
     <Compile Include="Questions\QuestionCreator\QuestionOneCreator.cs" />
+    <Compile Include="Questions\QuestionCreator\QuestionOneCreatorFalseImage.cs" />
     <Compile Include="Questions\QuestionCreator\QuestionOneListCreator.cs" />
     <Compile Include="Questions\QuestionCreator\QuestionTwoCreator.cs" />
     <Compile Include="Questions\QuestionCreator\QuestionTwoListCreator.cs" />
