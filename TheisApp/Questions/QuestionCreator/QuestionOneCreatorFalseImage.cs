@@ -19,7 +19,7 @@ namespace TheisApp.Questions.QuestionCreator
         protected override QuestionOne CreateQuestion(TrailOne trail, bool expectedAnswer)
         {
             var question =  base.CreateQuestion(trail, expectedAnswer);
-            question.Image = GetFalseImage(question.Image);
+            question.ImagePath = GetFalseImage(question.ImagePath);
             return question;
         }
 

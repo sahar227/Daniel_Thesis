@@ -1,4 +1,5 @@
-﻿using DBModel.Trail;
+﻿using DBModel.QuestionModels;
+using DBModel.Trail;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 using System;
@@ -34,6 +35,8 @@ namespace DBModel
 
         public DbSet<TrailOne> TrailOnes { get; set; }
         public DbSet<TrailTwo> TrailTwos { get; set; }
+        public DbSet<QuestionOne> QuestionOnes { get; set; }
+        public DbSet<QuestionTwo> QuestionTwos { get; set; }
         public DbSet<User> Users { get; set; }
 
     }

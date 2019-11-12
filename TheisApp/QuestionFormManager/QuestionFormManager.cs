@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheisApp.QuestionFormManager.QuestionFormCreators;
+using TrailRepository;
 
 namespace TheisApp.QuestionFormManager
 {
@@ -26,7 +27,6 @@ namespace TheisApp.QuestionFormManager
 
         private void OpenForm(Form f)
         {
-            //this.Hide();
             f.Closed += (s, args) => PlayNextForm();
             f.Show();
         }
@@ -35,9 +35,9 @@ namespace TheisApp.QuestionFormManager
         {
             m_currentFormIndex++;
             if (m_currentFormIndex < m_forms.Count)
-                OpenForm(m_forms[m_currentFormIndex]);
+                OpenForm(m_forms[m_currentFormIndex]);   
             else
-                CurrentUser.UpsertUser();
+                UserRepository.UpsertUser(CurrentUser.currentUser);
         }
     }
 }

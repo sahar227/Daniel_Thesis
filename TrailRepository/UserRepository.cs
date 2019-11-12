@@ -11,6 +11,17 @@ namespace TrailRepository
     {
         private static readonly SampleDBContext m_dataContext = new SampleDBContext();
 
+        public static void UpsertUser(User user)
+        {
+            if (user != null)
+                using (var context = new SampleDBContext())
+                {
+                    var userEntity = context.Users.Update(user);
+                    context.SaveChanges();
+                    user.Id = userEntity.Entity.Id;
+                }
+        }
+
         public static List<User> GetAllUsers()
         {
             return m_dataContext.Users.ToList();

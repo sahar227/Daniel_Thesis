@@ -3,17 +3,19 @@ using System;
 
 namespace DBModel.QuestionModels
 {
-    public abstract class Question
+    public abstract class Question : DBModel
     {
-        public string AskedQuestion { get; }
-        public bool ExpectedAnswer { get; }
+        public int UserId { get; set; }
+        public string AskedQuestion { get; set; }
+        public bool ExpectedAnswer { get; set; }
         public bool UserAnswer { get; set; }
         public TimeSpan AnswerTime { get; set; }
 
-        public Question(string subject, bool expectedAnswer)
+        protected Question(int userId, string askedQuestion, bool expectedAnswer)
         {
-            AskedQuestion = subject;
+            AskedQuestion = askedQuestion;
             ExpectedAnswer = expectedAnswer;
+            UserId = userId;
         }
 
 

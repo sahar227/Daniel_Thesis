@@ -36,6 +36,7 @@ namespace TheisApp
             if ((!string.IsNullOrWhiteSpace(name)) && (group != UserGroup.Unknown))
             {
                 CurrentUser.currentUser = new User(name, group);
+                UserRepository.UpsertUser(CurrentUser.currentUser);
                 var questionFormManager = new QuestionFormManager.QuestionFormManager(group);
                 this.Hide();
                 questionFormManager.Start();

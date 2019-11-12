@@ -25,9 +25,6 @@ namespace DBModel
         public DateTime? StartTimeStageTwo { get; set; }
         public DateTime? EndTimeStageTwo { get; set; }
 
-        public List<QuestionOne> StageOneQuestions = new List<QuestionOne>();
-        public List<QuestionTwo> StageTwoQuestions = new List<QuestionTwo>();
-
         public User(string fullName, UserGroup group)
         {
             FullName = fullName;

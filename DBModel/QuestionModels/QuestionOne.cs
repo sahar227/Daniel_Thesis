@@ -9,13 +9,14 @@ namespace DBModel.QuestionModels
 {
     public class QuestionOne : Question
     {
-        public string Image { get; set; }
-        public string Sound { get; set; }
+        public string ImagePath { get; set; }
+        public string SoundPath { get; set; }
 
-        public QuestionOne(TrailOne trailDetails, string question, bool expectedAnswer) : base(question, expectedAnswer)
+        public QuestionOne(int userId, string askedQuestion, bool expectedAnswer, string imagePath, string soundPath) : base(userId, askedQuestion, expectedAnswer)
         {
-            Image = trailDetails.ImagePath;
-            Sound = trailDetails.SoundPath;
+            ImagePath = imagePath;
+            SoundPath = soundPath;
+
         }
 
     }

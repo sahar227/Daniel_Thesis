@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using TrailRepository;
 
 namespace TheisApp
 {
@@ -28,7 +29,7 @@ namespace TheisApp
 
         private void FinishStage()
         {
-            CurrentUser.AddQuestionOnes(m_questionManager.Questions);
+            QuestionRepository.SaveQuestionOnes(m_questionManager.Questions);
             CurrentUser.currentUser.EndTimeStageOne = DateTime.Now;
             this.Close();
         }
@@ -39,7 +40,7 @@ namespace TheisApp
             if (question != null)
             {
                 QuestionLabel.Text = question.AskedQuestion;
-                pictureBox.ImageLocation = question.Image;
+                pictureBox.ImageLocation = question.ImagePath;
             }
             else
             {

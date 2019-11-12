@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrailRepository;
 
 namespace TheisApp
 {
@@ -59,7 +60,7 @@ namespace TheisApp
 
         private void FinishStage()
         {
-            CurrentUser.AddQuestionTwos(m_questionManager.Questions);
+            QuestionRepository.SaveQuestionTwos(m_questionManager.Questions);
             CurrentUser.currentUser.EndTimeStageTwo = DateTime.Now;
             this.Close();
         }

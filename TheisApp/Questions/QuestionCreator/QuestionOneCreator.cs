@@ -55,7 +55,8 @@ namespace TheisApp.Questions.QuestionCreator
             var questionSubject = SetLetterInQuestion(trail.Title, expectedAnswer);
             var question = FormatQuestion(questionSubject, trail.Title);
 
-            return new QuestionOne(trail, question, expectedAnswer);
+            return new QuestionOne(CurrentUser.currentUser.Id, question, expectedAnswer,
+                trail.ImagePath, trail.SoundPath);
         }
 
         private char SetLetterInQuestion(string word, bool expectedAnswer)
