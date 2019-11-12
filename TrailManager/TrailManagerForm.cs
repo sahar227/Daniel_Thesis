@@ -1,4 +1,5 @@
-﻿using DBModel;
+﻿using Common;
+using DBModel;
 using DBModel.Trail;
 using DBModel.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,8 @@ namespace ThesisProject
         Dictionary<string, TrailTwo> TrailTwos = new Dictionary<string, TrailTwo>();
 
         string selectedImage = null;
+        string selectedSound = null;
+
         public TrailManagerForm()
         {
             // Parse words from sqlite into words dictionaries 
@@ -68,6 +71,21 @@ namespace ThesisProject
             }
         }
 
+        private void SoundSelect_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new OpenFileDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
+                {
+                    selectedSound = fbd.FileName;
+                }
+                else
+                    MessageBox.Show("Invalid file!", "Message");
+            }
+        }
+
         private void ConfirmBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(titleBox.Text))
@@ -98,6 +116,10 @@ namespace ThesisProject
                 string storedImage = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".image");
                 File.Copy(selectedImage, storedImage);
                 newTrailOne.ImagePath = storedImage;
+                string storedSound = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".sound");
+                File.Copy(selectedSound, storedSound);
+                newTrailOne.SoundPath = storedSound;
+
                 using (var dataContext = new SampleDBContext())
                 {
                     AddTrail(newTrailOne, TrailOnes, trailOneList, dataContext.TrailOnes);
@@ -116,6 +138,7 @@ namespace ThesisProject
             }
             MessageBox.Show("Trail was added successfully!", "Message");
             selectedImage = null;
+            selectedSound = null;
             titleBox.Text = "";
             translationBox.Text = "";
 
@@ -145,13 +168,20 @@ namespace ThesisProject
         private void phaseOneRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (phaseOneRadio.Checked)
+            {
                 ImageSelect.Enabled = true;
+                SoundSelect.Enabled = true;
+            }
         }
 
         private void phaseTwoRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (phaseTwoRadio.Checked)
+            {
                 ImageSelect.Enabled = false;
+                SoundSelect.Enabled = false;
+
+            }
         }
 
         private void rmvTrailTwo(object sender, EventArgs e)
@@ -159,7 +189,6 @@ namespace ThesisProject
             var word = trailTwoList.SelectedItem?.ToString();
             if (word == null)
             {
-                // log error
                 return;
             }
             trailTwoList.Items.Remove(word);
@@ -177,7 +206,6 @@ namespace ThesisProject
             var word = trailOneList.SelectedItem?.ToString();
             if(word == null)
             {
-                // log error
                 return;
             }
             trailOneList.Items.Remove(word);
@@ -189,6 +217,22 @@ namespace ThesisProject
             TrailOnes.Remove(word);
             Directory.Delete(Path.Combine(@"C:\ThesisUtils\Trails", word), true);
             pictureBox.ImageLocation = null;
+        }
+
+        private void HearTrailSoundBtn_Click(object sender, EventArgs e)
+        {
+            var word = trailOneList.SelectedItem?.ToString();
+            if (word == null)
+                return;
+
+            try
+            {
+                AudioPlayer.PlayAudio(TrailOnes[word].SoundPath);
+            }
+            catch(InvalidOperationException)
+            {
+                MessageBox.Show("Can currently only play .wav files!", "Error");
+            }
         }
     }
 }

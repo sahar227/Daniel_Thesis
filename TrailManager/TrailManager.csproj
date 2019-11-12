@@ -187,6 +187,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{84733187-C180-4868-B080-01E5C170D380}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DBModel\DBModel.csproj">
       <Project>{e75e1768-6a44-4763-b8a7-8ae0971c3a36}</Project>
       <Name>DBModel</Name>

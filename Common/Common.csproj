@@ -146,6 +146,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioPlayer.cs" />
     <Compile Include="Mixins\CollectionMixins.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
