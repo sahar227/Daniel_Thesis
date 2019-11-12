@@ -1,4 +1,5 @@
-﻿using DBModel;
+﻿using Common;
+using DBModel;
 using DBModel.QuestionModels;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace TheisApp
 
         private void FinishStage()
         {
+            AudioPlayer.StopAudio();
             QuestionRepository.SaveQuestionOnes(m_questionManager.Questions);
             CurrentUser.currentUser.EndTimeStageOne = DateTime.Now;
             this.Close();
@@ -41,6 +43,7 @@ namespace TheisApp
             {
                 QuestionLabel.Text = question.AskedQuestion;
                 pictureBox.ImageLocation = question.ImagePath;
+                AudioPlayer.PlayAudio(question.SoundPath);
             }
             else
             {
