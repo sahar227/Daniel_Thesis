@@ -34,6 +34,8 @@
             this.NoBtn = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.QuestionTime = new System.Windows.Forms.Timer(this.components);
+            this.TimerLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,12 +87,28 @@
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
             // 
+            // QuestionTime
+            // 
+            this.QuestionTime.Enabled = true;
+            this.QuestionTime.Interval = 1000;
+            this.QuestionTime.Tick += new System.EventHandler(this.QuestionTime_Tick);
+            // 
+            // TimerLabel
+            // 
+            this.TimerLabel.AutoSize = true;
+            this.TimerLabel.Location = new System.Drawing.Point(12, 25);
+            this.TimerLabel.Name = "TimerLabel";
+            this.TimerLabel.Size = new System.Drawing.Size(19, 13);
+            this.TimerLabel.TabIndex = 6;
+            this.TimerLabel.Text = "30";
+            // 
             // StageOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.ControlBox = false;
+            this.Controls.Add(this.TimerLabel);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.NoBtn);
             this.Controls.Add(this.YesBtn);
@@ -112,5 +130,7 @@
         private System.Windows.Forms.Button NoBtn;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Timer QuestionTime;
+        private System.Windows.Forms.Label TimerLabel;
     }
 }

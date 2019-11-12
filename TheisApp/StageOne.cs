@@ -13,6 +13,7 @@ namespace TheisApp
     // TODO: Add timer to questions
     public partial class StageOne : Form
     {
+        private const int TimeOutTime = 30;
         private readonly QuestionManager<QuestionOne> m_questionManager;
 
         public StageOne(QuestionManager<QuestionOne> questionManager)
@@ -30,6 +31,7 @@ namespace TheisApp
 
         private void FinishStage()
         {
+            QuestionTime.Stop();
             AudioPlayer.StopAudio();
             QuestionRepository.SaveQuestionOnes(m_questionManager.Questions);
             CurrentUser.currentUser.EndTimeStageOne = DateTime.Now;
@@ -41,6 +43,7 @@ namespace TheisApp
             var question = m_questionManager.GetNextQuestion();
             if (question != null)
             {
+                ResetTimer();
                 QuestionLabel.Text = question.AskedQuestion;
                 pictureBox.ImageLocation = question.ImagePath;
                 AudioPlayer.PlayAudio(question.SoundPath);
@@ -69,6 +72,31 @@ namespace TheisApp
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
+
+        }
+
+        private int secondsSinceQuestionStarted = TimeOutTime;
+
+        // Ticks every second
+        private void QuestionTime_Tick(object sender, EventArgs e)
+        {
+            secondsSinceQuestionStarted--;
+            TimerLabel.Text = secondsSinceQuestionStarted.ToString();
+            if (secondsSinceQuestionStarted <= 0)
+            {
+                QuestionTime.Stop();
+                // Ask Daniel what this should say
+                MessageBox.Show("Question timeout", "timeout");
+                SetNewQuestionOrFinish();
+                QuestionTime.Start();
+
+            }
+        }
+
+        private void ResetTimer()
+        {
+            secondsSinceQuestionStarted = TimeOutTime;
+            TimerLabel.Text = secondsSinceQuestionStarted.ToString();
 
         }
     }
