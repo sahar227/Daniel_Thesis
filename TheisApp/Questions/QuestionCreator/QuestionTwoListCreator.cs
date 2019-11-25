@@ -26,15 +26,17 @@ namespace TheisApp.Questions.QuestionCreator
         public List<QuestionTwo> CreateQuestions()
         {
             var questions = new List<QuestionTwo>();
-            foreach (var trail in m_trails)
+            for (int i = 0; i < m_trailRepeat; i++)
             {
-                for (int i = 0; i < m_trailRepeat; i++)
+                var blockQuestions = new List<QuestionTwo>();
+                foreach (var trail in m_trails)
                 {
-                    questions.Add(m_questionCreator.CreateYesQuestion(trail));
-                    questions.Add(m_questionCreator.CreateNoQuestion(trail));
+                    blockQuestions.Add(m_questionCreator.CreateYesQuestion(trail));
+                    blockQuestions.Add(m_questionCreator.CreateNoQuestion(trail));
                 }
+                blockQuestions.Shuffle();
+                questions.AddRange(blockQuestions);
             }
-            questions.Shuffle();
             return questions;
         }
     }
