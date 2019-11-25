@@ -8,7 +8,8 @@ namespace Common
 {
     public static class AudioPlayer
     {
-        private static System.Media.SoundPlayer player;
+        private static WMPLib.WindowsMediaPlayer wplayer;
+
         /// <summary>
         /// At the moment can only play .wav files
         /// Throws InvalidOperationException
@@ -20,17 +21,19 @@ namespace Common
             if (soundPath == null)
                 return;
 
-            player = new System.Media.SoundPlayer(soundPath);
-            player.Play();
+            wplayer = new WMPLib.WindowsMediaPlayer
+            {
+                URL = soundPath
+            };
+            wplayer.controls.play();
         }
 
         public static void StopAudio()
         {
-            if (player != null)
+            if(wplayer != null)
             {
-                player.Stop();
-                player.Dispose();
-                player = null;
+                wplayer.controls.stop();
+                wplayer = null;
             }
         }
     }

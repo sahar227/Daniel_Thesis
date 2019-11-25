@@ -115,7 +115,7 @@ namespace ThesisProject
                 string storedImage = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".image");
                 File.Copy(selectedImage, storedImage);
                 newTrailOne.ImagePath = storedImage;
-                string storedSound = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".sound");
+                string storedSound = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".mp3");
                 File.Copy(selectedSound, storedSound);
                 newTrailOne.SoundPath = storedSound;
 
@@ -131,7 +131,7 @@ namespace ThesisProject
                 newTrailTwo.InitTrail(titleBox.Text, translationBox.Text);
                 string storedPath = Path.Combine(@"C:\ThesisUtils\Trails", newTrailTwo.InterfaceString());
                 Directory.CreateDirectory(storedPath);
-                string storedSound = Path.Combine(storedPath, newTrailTwo.InterfaceString() + ".sound");
+                string storedSound = Path.Combine(storedPath, newTrailTwo.InterfaceString() + ".mp3");
                 File.Copy(selectedSound, storedSound);
                 newTrailTwo.SoundPath = storedSound;
 
@@ -233,7 +233,7 @@ namespace ThesisProject
             }
             catch(InvalidOperationException)
             {
-                MessageBox.Show("Can currently only play .wav files!", "Error");
+                MessageBox.Show("Can currently only play .mp3 files!", "Error");
             }
         }
 
@@ -249,7 +249,7 @@ namespace ThesisProject
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Can currently only play .wav files!", "Error");
+                MessageBox.Show("Can currently only play .mp3 files!", "Error");
             }
         }
     }
