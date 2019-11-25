@@ -27,6 +27,11 @@ namespace TrailRepository
             return m_dataContext.Users.ToList();
         }
 
+        public static User GetUserById(int userId)
+        {
+            return m_dataContext.Users.Where(v => v.Id == userId).FirstOrDefault();
+        }
+
         public static List<User> GetUnfinishedGroup4Users()
         {
             return m_dataContext.Users.Where(user => user.Group == UserGroup.Four && user.EndTimeStageTwo == null).ToList();

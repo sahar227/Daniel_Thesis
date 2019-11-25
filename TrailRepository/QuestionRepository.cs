@@ -27,5 +27,23 @@ namespace TrailRepository
                 context.SaveChanges();
             }
         }
+
+        public static List<QuestionOne> GetQuestionOnesForUser(int userId)
+        {
+            using (var context = new SampleDBContext())
+            {
+               var questions = context.QuestionOnes.Where(v => v.UserId == userId).ToList();
+                return questions;
+            }
+        }
+
+        public static List<QuestionTwo> GetQuestionTwosForUser(int userId)
+        {
+            using (var context = new SampleDBContext())
+            {
+                var questions = context.QuestionTwos.Where(v => v.UserId == userId).ToList();
+                return questions;
+            }
+        }
     }
 }
