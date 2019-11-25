@@ -39,7 +39,7 @@ namespace TheisApp.Questions.QuestionCreator
         {
             var questionSubject = SetTranslationInQuestion(trail.Translation, expectedAnswer);
             var question = FormatQuestion(questionSubject, trail.Title);
-            return new QuestionTwo(CurrentUser.currentUser.Id, question, expectedAnswer);
+            return new QuestionTwo(CurrentUser.currentUser.Id, question, trail.SoundPath, expectedAnswer);
         }
 
         private string SetTranslationInQuestion(string actualTranslation, bool expectedAnswer)

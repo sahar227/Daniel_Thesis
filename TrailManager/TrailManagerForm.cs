@@ -110,7 +110,6 @@ namespace ThesisProject
                 var newTrailOne = new TrailOne();
                 newTrailOne.InitTrail(titleBox.Text, translationBox.Text);
                 string storedPath = Path.Combine(@"C:\ThesisUtils\Trails", newTrailOne.InterfaceString());
-
                 Directory.CreateDirectory(storedPath);
 
                 string storedImage = Path.Combine(storedPath, newTrailOne.InterfaceString() + ".image");
@@ -130,6 +129,12 @@ namespace ThesisProject
             {
                 var newTrailTwo = new TrailTwo();
                 newTrailTwo.InitTrail(titleBox.Text, translationBox.Text);
+                string storedPath = Path.Combine(@"C:\ThesisUtils\Trails", newTrailTwo.InterfaceString());
+                Directory.CreateDirectory(storedPath);
+                string storedSound = Path.Combine(storedPath, newTrailTwo.InterfaceString() + ".sound");
+                File.Copy(selectedSound, storedSound);
+                newTrailTwo.SoundPath = storedSound;
+
                 using (var dataContext = new SampleDBContext())
                 {
                     AddTrail(newTrailTwo, TrailTwos, trailTwoList, dataContext.TrailTwos);
@@ -170,7 +175,6 @@ namespace ThesisProject
             if (phaseOneRadio.Checked)
             {
                 ImageSelect.Enabled = true;
-                SoundSelect.Enabled = true;
             }
         }
 
@@ -179,8 +183,6 @@ namespace ThesisProject
             if (phaseTwoRadio.Checked)
             {
                 ImageSelect.Enabled = false;
-                SoundSelect.Enabled = false;
-
             }
         }
 
@@ -230,6 +232,22 @@ namespace ThesisProject
                 AudioPlayer.PlayAudio(TrailOnes[word].SoundPath);
             }
             catch(InvalidOperationException)
+            {
+                MessageBox.Show("Can currently only play .wav files!", "Error");
+            }
+        }
+
+        private void HearTrailTwoSoundBtn_Click(object sender, EventArgs e)
+        {
+            var word = trailTwoList.SelectedItem?.ToString();
+            if (word == null)
+                return;
+
+            try
+            {
+                AudioPlayer.PlayAudio(TrailTwos[word].SoundPath);
+            }
+            catch (InvalidOperationException)
             {
                 MessageBox.Show("Can currently only play .wav files!", "Error");
             }

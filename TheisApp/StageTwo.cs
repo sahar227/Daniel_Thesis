@@ -1,4 +1,5 @@
-﻿using DBModel;
+﻿using Common;
+using DBModel;
 using DBModel.QuestionModels;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace TheisApp
             if (question != null)
             {
                 QuestionLabel.Text = question.AskedQuestion;
+                AudioPlayer.PlayAudio(question.SoundPath);
             }
             else
             {
@@ -62,6 +64,7 @@ namespace TheisApp
         {
             QuestionRepository.SaveQuestionTwos(m_questionManager.Questions);
             CurrentUser.currentUser.EndTimeStageTwo = DateTime.Now;
+            AudioPlayer.StopAudio();
             this.Close();
         }
     }

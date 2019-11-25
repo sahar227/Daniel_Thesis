@@ -10,13 +10,10 @@ namespace DBModel.QuestionModels
     public class QuestionOne : Question
     {
         public string ImagePath { get; set; }
-        public string SoundPath { get; set; }
 
-        public QuestionOne(int userId, string askedQuestion, bool expectedAnswer, string imagePath, string soundPath) : base(userId, askedQuestion, expectedAnswer)
+        public QuestionOne(int userId, string askedQuestion, bool expectedAnswer, string imagePath, string soundPath) : base(userId, askedQuestion, soundPath, expectedAnswer)
         {
             ImagePath = imagePath;
-            SoundPath = soundPath;
-
         }
 
     }

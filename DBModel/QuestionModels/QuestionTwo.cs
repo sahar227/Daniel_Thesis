@@ -9,7 +9,7 @@ namespace DBModel.QuestionModels
 {
     public class QuestionTwo : Question
     {
-        public QuestionTwo(int userId, string askedQuestion, bool expectedAnswer) : base(userId, askedQuestion, expectedAnswer)
+        public QuestionTwo(int userId, string askedQuestion, string soundPath, bool expectedAnswer) : base(userId, askedQuestion, soundPath, expectedAnswer)
         {
 
         }

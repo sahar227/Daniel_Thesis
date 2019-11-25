@@ -10,5 +10,7 @@ namespace DBModel.Trail
     {
         public string Title { get; set; }
         public string Translation { get; set; }
+        public string SoundPath { get; set; }
+
     }
 }

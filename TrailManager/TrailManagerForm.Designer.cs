@@ -40,7 +40,7 @@
             this.rmvTrailOneBtn = new System.Windows.Forms.Button();
             this.rmvTrailTwoBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.HearTrailTwoSoundBtn = new System.Windows.Forms.Button();
             this.trailTwoList = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.translationBox = new System.Windows.Forms.TextBox();
@@ -173,15 +173,16 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "מילים של שלב 2";
             // 
-            // button4
+            // HearTrailTwoSoundBtn
             // 
-            this.button4.Location = new System.Drawing.Point(97, 246);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(68, 35);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "השמע";
-            this.button4.UseVisualStyleBackColor = true;
+            this.HearTrailTwoSoundBtn.Location = new System.Drawing.Point(97, 246);
+            this.HearTrailTwoSoundBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.HearTrailTwoSoundBtn.Name = "HearTrailTwoSoundBtn";
+            this.HearTrailTwoSoundBtn.Size = new System.Drawing.Size(68, 35);
+            this.HearTrailTwoSoundBtn.TabIndex = 12;
+            this.HearTrailTwoSoundBtn.Text = "השמע";
+            this.HearTrailTwoSoundBtn.UseVisualStyleBackColor = true;
+            this.HearTrailTwoSoundBtn.Click += new System.EventHandler(this.HearTrailTwoSoundBtn_Click);
             // 
             // trailTwoList
             // 
@@ -261,7 +262,7 @@
             this.Controls.Add(this.translationBox);
             this.Controls.Add(this.rmvTrailTwoBtn);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.HearTrailTwoSoundBtn);
             this.Controls.Add(this.trailTwoList);
             this.Controls.Add(this.rmvTrailOneBtn);
             this.Controls.Add(this.label4);
@@ -297,7 +298,7 @@
         private System.Windows.Forms.Button rmvTrailOneBtn;
         private System.Windows.Forms.Button rmvTrailTwoBtn;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button HearTrailTwoSoundBtn;
         private System.Windows.Forms.ListBox trailTwoList;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox translationBox;
