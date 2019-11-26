@@ -31,9 +31,10 @@ namespace TheisApp
                 return null;
         }
 
-        public void AnswerQuestion(bool answer)
+        public bool AnswerQuestionAndCheckIfCorrect(bool answer)
         {
             m_currentQuestion.UserAnswer = answer;
+            return m_currentQuestion.UserAnswer == m_currentQuestion.ExpectedAnswer;
         }
 
 

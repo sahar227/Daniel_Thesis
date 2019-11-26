@@ -66,7 +66,7 @@ namespace TheisApp
 
         private void GiveAnswer(bool answer)
         {
-            m_questionManager.AnswerQuestion(answer);
+            m_questionManager.AnswerQuestionAndCheckIfCorrect(answer);
             SetNewQuestionOrFinish();
         }
 

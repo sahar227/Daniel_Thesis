@@ -46,8 +46,26 @@ namespace TheisApp
 
         private void GiveAnswer(bool answer)
         {
-            m_questionManager.AnswerQuestion(answer);
-            SetNewQuestionOrFinish();
+            var isCorrect = m_questionManager.AnswerQuestionAndCheckIfCorrect(answer);
+            GiveFeedback(isCorrect);
+        }
+
+        private void GiveFeedback(bool isCorrect)
+        {
+            ContinueBtn.Visible = true;
+            if (isCorrect)
+            {
+                feedbackLabel.Text = "תשובה נכונה";
+                feedbackLabel.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                feedbackLabel.Text = "תשובה לא נכונה";
+                feedbackLabel.BackColor = Color.Red;
+            }
+            feedbackLabel.Visible = true;
+            YesBtn.Enabled = false;
+            NoBtn.Enabled = false;
         }
 
         private void YesBtn_Click(object sender, EventArgs e)
@@ -66,6 +84,20 @@ namespace TheisApp
             CurrentUser.currentUser.EndTimeStageTwo = DateTime.Now;
             AudioPlayer.StopAudio();
             this.Close();
+        }
+
+        private void ContinueBtn_Click(object sender, EventArgs e)
+        {
+            SetNewQuestionOrFinish();
+            PrepareControlsForNextQuestion();
+        }
+
+        private void PrepareControlsForNextQuestion()
+        {
+            ContinueBtn.Visible = false;
+            feedbackLabel.Visible = false;
+            YesBtn.Enabled = true;
+            NoBtn.Enabled = true;
         }
     }
 }
