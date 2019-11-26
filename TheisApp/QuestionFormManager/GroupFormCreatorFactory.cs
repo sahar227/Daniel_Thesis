@@ -14,43 +14,58 @@ namespace TheisApp.QuestionFormManager
         private static TrailRepository.TrailRepository m_trailRepository = new TrailRepository.TrailRepository();
         public static List<Form> CrateFormList(UserGroup group)
         {
-            var formCreator = new List<Func<TrailRepository.TrailRepository, Form>>();
+            var formList = new List<Form>();
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("במטלה זו תוצג בפניכם אות ולאחר מכן מילה בשפה זרה.");
+            stringBuilder.AppendLine("עליכם לקבוע האם האות מופיעה במילה ולהשיב בהתאם.");
+            var PhaseOneInstructions = new List<string>()
+            {
+                stringBuilder.ToString(),
+                "למשל - האות _: במילה _- מופיעה. לעומת זאת האות__ במילה - לא מופיעה"
+            };
+            stringBuilder.Clear();
+            stringBuilder.AppendLine("כעת יוצגו בפניכם מילים לא מוכרות בשפה זרה. עבור כל מילה יופיע במסך תרגום מסוים.");
+            stringBuilder.AppendLine("עליכם לקבוע האם התרגום תואם למילה או לחלופין שגוי.");
+            var PhaseTwoInstructions = new List<string>()
+            {
+                "תודה לכם על שיתוף הפעולה!",
+                stringBuilder.ToString()
+            };
             switch (group)
             {
                 case UserGroup.One:
-                    formCreator.Add(QuestionFormsCreator.CreatePhase1);
-                    formCreator.Add(QuestionFormsCreator.CreatePhase2);
+                    formList.Add(new InstructionForm(PhaseOneInstructions));
+                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
+                    formList.Add(new InstructionForm(PhaseTwoInstructions));
+                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
                     break;
 
                 case UserGroup.Two:
-                    formCreator.Add(QuestionFormsCreator.CreatePhase2);
+                    formList.Add(new InstructionForm(PhaseTwoInstructions));
+                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
                     break;
 
                 case UserGroup.Three:
-                    formCreator.Add(QuestionFormsCreator.CreatePhase1WithFalseImages);
-                    formCreator.Add(QuestionFormsCreator.CreatePhase2);
+                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase1WithFalseImages(m_trailRepository));
+                    formList.Add(new InstructionForm(PhaseTwoInstructions));
+                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
                     break;
 
                 case UserGroup.Four:
-                    formCreator.Add(QuestionFormsCreator.CreatePhase1);
+                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
                     break;
 
                 case UserGroup.FourContinued:
-                    formCreator.Add(QuestionFormsCreator.CreatePhase2);
+                    formList.Add(new InstructionForm(PhaseTwoInstructions));
+                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
                     break;
 
                 default: throw new NotImplementedException();
             }
-            return Create(formCreator);
-
-        }
-
-        private static List<Form> Create(List<Func<TrailRepository.TrailRepository, Form>> formCreators)
-        {
-            var formList = new List<Form>();
-            foreach (var formCreator in formCreators)
-                formList.Add(formCreator(m_trailRepository));
             return formList;
+
         }
     }
 }
