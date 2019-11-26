@@ -18,11 +18,16 @@ namespace TheisApp
     {
         private readonly QuestionManager<QuestionTwo> m_questionManager;
 
+        private const int NumberOfBlocks = 4;
+        private readonly int m_blockSize;
+        private int m_correctAnswersForBlock = 0;
+        private int m_shownQuestionNumber = 0;
         public StageTwo(QuestionManager<QuestionTwo> questionManager)
         {
             InitializeComponent();
             m_questionManager = questionManager;
             CurrentUser.currentUser.StartTimeStageTwo = DateTime.Now;
+            m_blockSize = m_questionManager.Questions.Count / NumberOfBlocks;
         }
 
         private void StageTwo_Load(object sender, EventArgs e)
@@ -32,6 +37,13 @@ namespace TheisApp
 
         private void SetNewQuestionOrFinish()
         {
+            m_shownQuestionNumber++;
+            if ((m_shownQuestionNumber != 1) && (m_shownQuestionNumber % m_blockSize == 1))
+            {
+                var correctPercent = ((double)m_correctAnswersForBlock / m_blockSize) * 100;
+                MessageBox.Show($"On block {m_shownQuestionNumber / m_blockSize }, answered {correctPercent.ToString("#.##")}% correctly");
+                m_correctAnswersForBlock = 0;
+            }
             var question = m_questionManager.GetNextQuestion();
             if (question != null)
             {
@@ -57,6 +69,7 @@ namespace TheisApp
             {
                 feedbackLabel.Text = "תשובה נכונה";
                 feedbackLabel.BackColor = Color.LightGreen;
+                m_correctAnswersForBlock++;
             }
             else
             {
