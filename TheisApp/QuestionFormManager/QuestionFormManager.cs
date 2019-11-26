@@ -89,7 +89,7 @@ namespace TheisApp.QuestionFormManager
                 }
             }
             Directory.CreateDirectory(@"C:\ThesisUtils\userResults");
-            System.IO.File.WriteAllText($@"C:\ThesisUtils\userResults\{user.FullName}.txt", userString.ToString());
+            System.IO.File.WriteAllText($@"C:\ThesisUtils\userResults\{user.Id.ToString() + " " + user.FullName}.txt", userString.ToString());
         }
     }
 }
