@@ -47,10 +47,10 @@ namespace TheisApp
         private void GiveAnswer(bool answer)
         {
             var isCorrect = m_questionManager.AnswerQuestionAndCheckIfCorrect(answer);
-            GiveFeedback(isCorrect);
+            GiveFeedbackOnAnswer(isCorrect);
         }
 
-        private void GiveFeedback(bool isCorrect)
+        private void GiveFeedbackOnAnswer(bool isCorrect)
         {
             ContinueBtn.Visible = true;
             if (isCorrect)
