@@ -18,7 +18,7 @@ namespace TheisApp
         {
             InitializeComponent();
             CurrentInstructionLabel.AutoSize = false;
-            CurrentInstructionLabel.Size = new Size(CurrentInstructionLabel.Size.Width, CurrentInstructionLabel.Size.Height * 3);
+            CurrentInstructionLabel.Size = new Size(CurrentInstructionLabel.Size.Width, CurrentInstructionLabel.Size.Height * 6);
             CurrentInstructionLabel.Anchor = AnchorStyles.Right;
             m_instructionStrings = instructionStrings;
             if(m_instructionStrings.Count > 0)

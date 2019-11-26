@@ -26,10 +26,18 @@ namespace TheisApp.QuestionFormManager
             stringBuilder.Clear();
             stringBuilder.AppendLine("כעת יוצגו בפניכם מילים לא מוכרות בשפה זרה. עבור כל מילה יופיע במסך תרגום מסוים.");
             stringBuilder.AppendLine("עליכם לקבוע האם התרגום תואם למילה או לחלופין שגוי.");
+
+            var stringBuilder2 = new StringBuilder();
+            stringBuilder2.AppendLine("שימו לב!");
+            stringBuilder2.AppendLine("במהלך המשימה כל מילה תופיע מספר פעמים וכן ינתן לכם פידבק אשר יעיד האם עניתם תשובה נכונה או שגויה. ");
+            stringBuilder2.AppendLine("המטרה: להצליח ללמוד כמה שיותר מילים בעזרת הפידבקים שתקבלו. ");
+            stringBuilder2.AppendLine("בהצלחה!");
+
             var PhaseTwoInstructions = new List<string>()
             {
                 "תודה לכם על שיתוף הפעולה!",
-                stringBuilder.ToString()
+                stringBuilder.ToString(),
+                stringBuilder2.ToString()
             };
             switch (group)
             {
