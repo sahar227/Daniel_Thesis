@@ -29,17 +29,10 @@ namespace TheisApp.Questions.QuestionCreator
             return CreateQuestion(trail, expectedAnswer: true);
         }
 
-        // TODO: change to hebrew
-        private string FormatQuestion(string questionSubject, string word)
-        {
-            return $"Is {questionSubject} the translation for word {word}?";
-        }
-
         private QuestionTwo CreateQuestion(TrailTwo trail, bool expectedAnswer)
         {
             var questionSubject = SetTranslationInQuestion(trail.Translation, expectedAnswer);
-            var question = FormatQuestion(questionSubject, trail.Title);
-            return new QuestionTwo(CurrentUser.currentUser.Id, question, trail.SoundPath, expectedAnswer);
+            return new QuestionTwo(CurrentUser.currentUser.Id, questionSubject, trail.SoundPath, expectedAnswer);
         }
 
         private string SetTranslationInQuestion(string actualTranslation, bool expectedAnswer)

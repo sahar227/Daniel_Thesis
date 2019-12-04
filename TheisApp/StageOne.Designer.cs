@@ -36,18 +36,21 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.QuestionTime = new System.Windows.Forms.Timer(this.components);
             this.TimerLabel = new System.Windows.Forms.Label();
+            this.LetterLabel = new System.Windows.Forms.Label();
+            this.ShowLetterTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // QuestionLabel
             // 
             this.QuestionLabel.AutoSize = true;
-            this.QuestionLabel.Location = new System.Drawing.Point(260, 99);
+            this.QuestionLabel.Location = new System.Drawing.Point(260, 117);
             this.QuestionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.QuestionLabel.Name = "QuestionLabel";
             this.QuestionLabel.Size = new System.Drawing.Size(35, 13);
             this.QuestionLabel.TabIndex = 0;
             this.QuestionLabel.Text = "label1";
+            this.QuestionLabel.Visible = false;
             // 
             // YesBtn
             // 
@@ -58,6 +61,7 @@
             this.YesBtn.TabIndex = 2;
             this.YesBtn.Text = "כן";
             this.YesBtn.UseVisualStyleBackColor = true;
+            this.YesBtn.Visible = false;
             this.YesBtn.Click += new System.EventHandler(this.YesBtn_Click);
             // 
             // NoBtn
@@ -69,6 +73,7 @@
             this.NoBtn.TabIndex = 3;
             this.NoBtn.Text = "לא";
             this.NoBtn.UseVisualStyleBackColor = true;
+            this.NoBtn.Visible = false;
             this.NoBtn.Click += new System.EventHandler(this.NoBtn_Click);
             // 
             // pictureBox
@@ -80,6 +85,7 @@
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 5;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Visible = false;
             // 
             // contextMenuStrip1
             // 
@@ -89,7 +95,6 @@
             // 
             // QuestionTime
             // 
-            this.QuestionTime.Enabled = true;
             this.QuestionTime.Interval = 1000;
             this.QuestionTime.Tick += new System.EventHandler(this.QuestionTime_Tick);
             // 
@@ -101,6 +106,21 @@
             this.TimerLabel.Size = new System.Drawing.Size(19, 13);
             this.TimerLabel.TabIndex = 6;
             this.TimerLabel.Text = "30";
+            this.TimerLabel.Visible = false;
+            // 
+            // LetterLabel
+            // 
+            this.LetterLabel.AutoSize = true;
+            this.LetterLabel.Location = new System.Drawing.Point(280, 155);
+            this.LetterLabel.Name = "LetterLabel";
+            this.LetterLabel.Size = new System.Drawing.Size(60, 13);
+            this.LetterLabel.TabIndex = 7;
+            this.LetterLabel.Text = "LetterLabel";
+            // 
+            // ShowLetterTimer
+            // 
+            this.ShowLetterTimer.Interval = 2000;
+            this.ShowLetterTimer.Tick += new System.EventHandler(this.ShowLetterTimer_Tick);
             // 
             // StageOne
             // 
@@ -108,6 +128,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.ControlBox = false;
+            this.Controls.Add(this.LetterLabel);
             this.Controls.Add(this.TimerLabel);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.NoBtn);
@@ -132,5 +153,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Timer QuestionTime;
         private System.Windows.Forms.Label TimerLabel;
+        private System.Windows.Forms.Label LetterLabel;
+        private System.Windows.Forms.Timer ShowLetterTimer;
     }
 }

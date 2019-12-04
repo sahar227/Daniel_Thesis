@@ -45,7 +45,7 @@ namespace TheisApp.Questions.QuestionCreator
         // TODO: change to hebrew
         private string FormatQuestion(char questionSubject, string word)
         {
-            return $"Does the letter {questionSubject} appear in the word {word}?";
+            return $"{questionSubject},{word}";
         }
 
         protected virtual QuestionOne CreateQuestion(TrailOne trail, bool expectedAnswer)
