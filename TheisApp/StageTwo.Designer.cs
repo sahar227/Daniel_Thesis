@@ -33,6 +33,7 @@
             this.NoBtn = new System.Windows.Forms.Button();
             this.feedbackLabel = new System.Windows.Forms.Label();
             this.ContinueBtn = new System.Windows.Forms.Button();
+            this.ReplaySoundBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // QuestionLabel
@@ -86,12 +87,23 @@
             this.ContinueBtn.Visible = false;
             this.ContinueBtn.Click += new System.EventHandler(this.ContinueBtn_Click);
             // 
+            // ReplaySoundBtn
+            // 
+            this.ReplaySoundBtn.Location = new System.Drawing.Point(250, 166);
+            this.ReplaySoundBtn.Name = "ReplaySoundBtn";
+            this.ReplaySoundBtn.Size = new System.Drawing.Size(75, 23);
+            this.ReplaySoundBtn.TabIndex = 5;
+            this.ReplaySoundBtn.Text = "הקשב שוב";
+            this.ReplaySoundBtn.UseVisualStyleBackColor = true;
+            this.ReplaySoundBtn.Click += new System.EventHandler(this.ReplaySoundBtn_Click);
+            // 
             // StageTwo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.ControlBox = false;
+            this.Controls.Add(this.ReplaySoundBtn);
             this.Controls.Add(this.ContinueBtn);
             this.Controls.Add(this.feedbackLabel);
             this.Controls.Add(this.NoBtn);
@@ -112,5 +124,6 @@
         private System.Windows.Forms.Button NoBtn;
         private System.Windows.Forms.Label feedbackLabel;
         private System.Windows.Forms.Button ContinueBtn;
+        private System.Windows.Forms.Button ReplaySoundBtn;
     }
 }

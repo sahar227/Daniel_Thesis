@@ -35,6 +35,7 @@ namespace TheisApp
             SetNewQuestionOrFinish();
         }
 
+        private QuestionTwo m_currentQuestion = null;
         private void SetNewQuestionOrFinish()
         {
             m_shownQuestionNumber++;
@@ -44,11 +45,11 @@ namespace TheisApp
                 MessageBox.Show($"On block {m_shownQuestionNumber / m_blockSize }, answered {correctPercent.ToString("#.##")}% correctly");
                 m_correctAnswersForBlock = 0;
             }
-            var question = m_questionManager.GetNextQuestion();
-            if (question != null)
+            m_currentQuestion = m_questionManager.GetNextQuestion();
+            if (m_currentQuestion != null)
             {
-                QuestionLabel.Text = question.AskedQuestion;
-                AudioPlayer.PlayAudio(question.SoundPath);
+                QuestionLabel.Text = m_currentQuestion.AskedQuestion;
+                AudioPlayer.PlayAudio(m_currentQuestion.SoundPath);
             }
             else
             {
@@ -79,6 +80,7 @@ namespace TheisApp
             feedbackLabel.Visible = true;
             YesBtn.Enabled = false;
             NoBtn.Enabled = false;
+            ReplaySoundBtn.Enabled = false;
         }
 
         private void YesBtn_Click(object sender, EventArgs e)
@@ -111,6 +113,12 @@ namespace TheisApp
             feedbackLabel.Visible = false;
             YesBtn.Enabled = true;
             NoBtn.Enabled = true;
+            ReplaySoundBtn.Enabled = true;
+        }
+
+        private void ReplaySoundBtn_Click(object sender, EventArgs e)
+        {
+            AudioPlayer.PlayAudio(m_currentQuestion.SoundPath);
         }
     }
 }
