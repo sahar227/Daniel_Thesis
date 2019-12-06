@@ -16,11 +16,14 @@ namespace TheisApp.QuestionFormManager
     {
         private readonly List<Form> m_forms = new List<Form>();
         private int m_currentFormIndex = 0;
+        private Form m_startForm;
 
-        public QuestionFormManager(UserGroup group)
+        public QuestionFormManager(Form startForm, UserGroup group)
         {
             m_forms = GroupFormCreatorFactory.CrateFormList(group);
+            m_startForm = startForm;
         }
+
 
         public void Start()
         {
@@ -43,6 +46,7 @@ namespace TheisApp.QuestionFormManager
                 UserRepository.UpsertUser(CurrentUser.currentUser);
                 // save user results
                 SaveUserResults();
+                m_startForm.Show();
             }
         }
 

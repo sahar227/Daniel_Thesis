@@ -37,7 +37,7 @@ namespace TheisApp
             {
                 CurrentUser.currentUser = new User(name, group);
                 UserRepository.UpsertUser(CurrentUser.currentUser);
-                var questionFormManager = new QuestionFormManager.QuestionFormManager(group);
+                var questionFormManager = new QuestionFormManager.QuestionFormManager(this, group);
                 this.Hide();
                 questionFormManager.Start();
             }
@@ -65,7 +65,7 @@ namespace TheisApp
             if (!string.IsNullOrWhiteSpace(selectedName))
             {
                 CurrentUser.currentUser = m_group4Users.Find(v => v.FullName == selectedName);
-                var questionFormManager = new QuestionFormManager.QuestionFormManager(UserGroup.FourContinued);
+                var questionFormManager = new QuestionFormManager.QuestionFormManager(this, UserGroup.FourContinued);
                 this.Hide();
                 questionFormManager.Start();
             }
