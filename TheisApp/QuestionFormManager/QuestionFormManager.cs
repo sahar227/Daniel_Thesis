@@ -70,7 +70,8 @@ namespace TheisApp.QuestionFormManager
                 userString.AppendLine("Phase one questions:");
                 foreach (var question in questionOnes)
                 {
-                    userString.AppendLine($"\t {question.AskedQuestion}");
+                    var askedQuestion = question.AskedQuestion.Split(",".ToArray());
+                    userString.AppendLine($"\t Is the letter {askedQuestion[0]} in the word {askedQuestion[1]}?");
                     var userAnswer = question.UserAnswer ? "yes" : "no";
                     var userResult = question.UserAnswer == question.ExpectedAnswer ? "correct" : "wrong";
                     userString.AppendLine($"\t User answer was '{userAnswer}' and it was {userResult}");
@@ -85,7 +86,8 @@ namespace TheisApp.QuestionFormManager
                 userString.AppendLine("Phase two questions:");
                 foreach (var question in questionTwos)
                 {
-                    userString.AppendLine($"\t {question.AskedQuestion}");
+                    var askedQuestion = question.AskedQuestion.Split(",".ToArray());
+                    userString.AppendLine($"\t Is {askedQuestion[0]} the translation of {askedQuestion[1]}");
                     var userAnswer = question.UserAnswer ? "yes" : "no";
                     var userResult = question.UserAnswer == question.ExpectedAnswer ? "correct" : "wrong";
                     userString.AppendLine($"\t User answer was '{userAnswer}' and it was {userResult}");

@@ -48,7 +48,8 @@ namespace TheisApp
             m_currentQuestion = m_questionManager.GetNextQuestion();
             if (m_currentQuestion != null)
             {
-                QuestionLabel.Text = m_currentQuestion.AskedQuestion;
+                var askedQuestion = m_currentQuestion.AskedQuestion.Split(",".ToArray());
+                QuestionLabel.Text = askedQuestion[0];
                 AudioPlayer.PlayAudio(m_currentQuestion.SoundPath);
             }
             else
