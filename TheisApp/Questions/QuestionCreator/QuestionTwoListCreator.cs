@@ -34,7 +34,7 @@ namespace TheisApp.Questions.QuestionCreator
                     blockQuestions.Add(m_questionCreator.CreateYesQuestion(trail));
                     blockQuestions.Add(m_questionCreator.CreateNoQuestion(trail));
                 }
-                blockQuestions.Shuffle();
+                blockQuestions = blockQuestions.Shuffle();
                 questions.AddRange(blockQuestions);
             }
             return questions;

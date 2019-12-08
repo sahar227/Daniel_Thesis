@@ -33,7 +33,7 @@ namespace TheisApp.Questions.QuestionCreator
                     questions.Add(m_questionCreator.CreateNoQuestion(trail));
                 }
             }
-            questions.Shuffle();
+            questions = questions.Shuffle();
             return questions;
         }
 
