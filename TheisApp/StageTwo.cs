@@ -25,6 +25,7 @@ namespace TheisApp
         public StageTwo(QuestionManager<QuestionTwo> questionManager)
         {
             InitializeComponent();
+            QuestionLabel.Font = new Font("Arial", 20, FontStyle.Regular);
             m_questionManager = questionManager;
             CurrentUser.currentUser.StartTimeStageTwo = DateTime.Now;
             m_blockSize = m_questionManager.Questions.Count / NumberOfBlocks;

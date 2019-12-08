@@ -21,7 +21,8 @@ namespace TheisApp
         public StageOne(QuestionManager<QuestionOne> questionManager)
         {
             InitializeComponent();
-            LetterLabel.Font = new Font("Arial", 24, FontStyle.Bold);
+            LetterLabel.Font = new Font("Arial", 40, FontStyle.Bold);
+            QuestionLabel.Font = new Font("Arial", 20, FontStyle.Regular);
             m_questionManager = questionManager;
             CurrentUser.currentUser.StartTimeStageOne = DateTime.Now;
         }

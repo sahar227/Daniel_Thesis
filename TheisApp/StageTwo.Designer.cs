@@ -39,7 +39,7 @@
             // QuestionLabel
             // 
             this.QuestionLabel.AutoSize = true;
-            this.QuestionLabel.Location = new System.Drawing.Point(274, 109);
+            this.QuestionLabel.Location = new System.Drawing.Point(257, 107);
             this.QuestionLabel.Name = "QuestionLabel";
             this.QuestionLabel.Size = new System.Drawing.Size(35, 13);
             this.QuestionLabel.TabIndex = 0;
