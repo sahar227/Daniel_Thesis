@@ -11,7 +11,6 @@ namespace TheisApp.QuestionFormManager
 {
     public static class GroupFormCreatorFactory
     {
-        private static TrailRepository.TrailRepository m_trailRepository = new TrailRepository.TrailRepository();
         public static List<Form> CrateFormList(UserGroup group)
         {
             var formList = new List<Form>();
@@ -43,31 +42,31 @@ namespace TheisApp.QuestionFormManager
             {
                 case UserGroup.One:
                     formList.Add(new InstructionForm(PhaseOneInstructions));
-                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase1());
                     formList.Add(new InstructionForm(PhaseTwoInstructions));
-                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase2());
                     break;
 
                 case UserGroup.Two:
                     formList.Add(new InstructionForm(PhaseTwoInstructions));
-                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase2());
                     break;
 
                 case UserGroup.Three:
-                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
-                    formList.Add(QuestionFormsCreator.CreatePhase1WithFalseImages(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase1());
+                    formList.Add(QuestionFormsCreator.CreatePhase1WithFalseImages());
                     formList.Add(new InstructionForm(PhaseTwoInstructions));
-                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase2());
                     break;
 
                 case UserGroup.Four:
-                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
-                    formList.Add(QuestionFormsCreator.CreatePhase1(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase1());
+                    formList.Add(QuestionFormsCreator.CreatePhase1());
                     break;
 
                 case UserGroup.FourContinued:
                     formList.Add(new InstructionForm(PhaseTwoInstructions));
-                    formList.Add(QuestionFormsCreator.CreatePhase2(m_trailRepository));
+                    formList.Add(QuestionFormsCreator.CreatePhase2());
                     break;
 
                 default: throw new NotImplementedException();

@@ -11,20 +11,20 @@ namespace TheisApp.QuestionFormManager.QuestionFormCreators
 {
     public static class QuestionFormsCreator
     {
-        public static Form CreatePhase1(TrailRepository.TrailRepository trailRepository)
+        public static Form CreatePhase1()
         {
             // TODO: Maybe use dependency injection (lookup ninject)
-            var trailOnes = trailRepository.LoadTrailOnesFromDatabase();
+            var trailOnes = TrailRepository.TrailRepository.LoadTrailOnesFromDatabase();
             var questionCreator = new QuestionOneCreator(trailOnes.SelectMany(v => v.Title).Distinct().ToList());
             var questionOneListCreator = new QuestionOneListCreator(questionCreator, trailOnes);
             var questionOneManager = new QuestionManager<QuestionOne>(questionOneListCreator);
             return new StageOne(questionOneManager);
         }
 
-        public static Form CreatePhase1WithFalseImages(TrailRepository.TrailRepository trailRepository)
+        public static Form CreatePhase1WithFalseImages()
         {
             // TODO: Maybe use dependency injection (lookup ninject)
-            var trailOnes = trailRepository.LoadTrailOnesFromDatabase();
+            var trailOnes = TrailRepository.TrailRepository.LoadTrailOnesFromDatabase();
             var questionCreator = new QuestionOneCreatorFalseImage(trailOnes.SelectMany(v => v.Title).Distinct().ToList(),
                                                                     trailOnes.Select(v => v.ImagePath).Distinct().ToList());
             var questionOneListCreator = new QuestionOneListCreator(questionCreator, trailOnes);
@@ -32,10 +32,10 @@ namespace TheisApp.QuestionFormManager.QuestionFormCreators
             return new StageOne(questionOneManager);
         }
 
-        public static Form CreatePhase2(TrailRepository.TrailRepository trailRepository)
+        public static Form CreatePhase2()
         {
             // TODO: Maybe use dependency injection (lookup ninject)
-            var trailTwos = trailRepository.LoadTrailTwosFromDatabase();
+            var trailTwos = TrailRepository.TrailRepository.LoadTrailTwosFromDatabase();
             var questionCreator = new QuestionTwoCreator(trailTwos.Select(v => v.Translation).Distinct().ToList());
             var questionTwoListCreator = new QuestionTwoListCreator(questionCreator, trailTwos);
             var questionTwoManager = new QuestionManager<QuestionTwo>(questionTwoListCreator);

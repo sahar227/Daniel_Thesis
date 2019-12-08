@@ -8,34 +8,29 @@ using System.Threading.Tasks;
 
 namespace TrailRepository
 {
-    public interface ITrailRepository
+    public static class TrailRepository
     {
-        List<TrailOne> LoadTrailOnesFromDatabase();
-        List<TrailTwo> LoadTrailTwosFromDatabase();
-    }
-
-    public class TrailRepository : ITrailRepository
-    {
-        private readonly SampleDBContext m_dataContext = new SampleDBContext();
-
-        private List<TrailOne> m_trailOnes = null;
-        private List<TrailTwo> m_trailTwos = null;
-        public List<TrailOne> LoadTrailOnesFromDatabase()
+        private static List<TrailOne> m_trailOnes = null;
+        private static List<TrailTwo> m_trailTwos = null;
+        public static List<TrailOne> LoadTrailOnesFromDatabase()
         {
-            if(m_trailOnes == null)
-                m_trailOnes = m_dataContext.TrailOnes.ToList();
+            if (m_trailOnes == null)
+            {
+                using (var context = new SampleDBContext())
+                    m_trailOnes = context.TrailOnes.ToList();
+            }
             return m_trailOnes;
         }
 
-        public List<TrailTwo> LoadTrailTwosFromDatabase()
+        public static List<TrailTwo> LoadTrailTwosFromDatabase()
         {
             if (m_trailTwos == null)
             {
                 var trailOnes = LoadTrailOnesFromDatabase();
-                m_trailTwos = m_dataContext.TrailTwos.ToList();
+                using (var context = new SampleDBContext())
+                    m_trailTwos = context.TrailTwos.ToList();
                 m_trailTwos.AddRange(trailOnes.Select(v => (TrailTwo)v));
             }
-
             return m_trailTwos;
         }
 
